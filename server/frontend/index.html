@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealership Review - Find the Best Dealers</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+        }
+
+        nav div {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            padding: 12px 30px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .dealers-section h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .dealer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .dealer-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dealer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dealer-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .dealer-info {
+            padding: 20px;
+        }
+
+        .dealer-info h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .dealer-info p {
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .dealer-rating {
+            color: #f59e0b;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .dealer-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .dealer-button:hover {
+            background: #764ba2;
+        }
+
+        .login-message {
+            background: #e7f3ff;
+            border: 1px solid #667eea;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .login-message a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-message a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-buttons a {
+            padding: 8px 16px;
+            background: white;
+            color: #667eea;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .auth-buttons a:hover {
+            background: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            nav div {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>Dealership Review</h1>
+            <div>
+                <a href="/about/">About Us</a>
+                <a href="/contact/">Contact</a>
+                <div class="auth-buttons" id="auth-buttons">
+                    <a href="/login/">Sign In</a>
+                    <a href="/register/">Sign Up</a>
+                </div>
+                <div id="user-info" style="display:none; color: white;">
+                    <span>Welcome, <span id="username"></span></span>
+                    <a href="#" id="logout-btn" style="color: white; text-decoration: underline;">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Find the Best Dealerships</h1>
+        <p>Read genuine reviews and ratings from customers like you</p>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search by dealer name or location...">
+            <button onclick="searchDealers()">Search</button>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="dealers-section">
+            <h2>Featured Dealerships</h2>
+            <div id="login-prompt" style="display:none;" class="login-message">
+                <p>Please <a href="/login/">login</a> to write reviews and interact with dealers.</p>
+            </div>
+            <div class="dealer-grid" id="dealer-list">
+                <!-- Dealers will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Dealership Review. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Load dealers on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadDealers();
+            checkUserLogin();
+        });
+
+        function loadDealers() {
+            fetch('/api/dealers/')
+                .then(response => response.json())
+                .then(data => {
+                    const dealerList = document.getElementById('dealer-list');
+                    dealerList.innerHTML = '';
+
+                    if (Array.isArray(data)) {
+                        data.forEach(dealer => {
+                            const dealerCard = `
+                                <div class="dealer-card">
+                                    <img src="${dealer.image_url || 'https://via.placeholder.com/300x200?text=' + dealer.business_name}" alt="${dealer.business_name}">
+                                    <div class="dealer-info">
+                                        <h3>${dealer.business_name}</h3>
+                                        <p><strong>${dealer.city}, ${dealer.state}</strong></p>
+                                        <p>${dealer.address}</p>
+                                        <p>📞 ${dealer.phone}</p>
+                                        <p>📧 ${dealer.email}</p>
+                                        <div class="dealer-rating">⭐ ${dealer.reviews?.length || 0} Reviews</div>
+                                        <a href="/dealer/${dealer.id}/" class="dealer-button">View Details</a>
+                                    </div>
+                                </div>
+                            `;
+                            dealerList.innerHTML += dealerCard;
+                        });
+                    } else if (data.results) {
+                        data.results.forEach(dealer => {
+                            const dealerCard = `
+                                <div class="dealer-card">
+                                    <img src="${dealer.image_url || 'https://via.placeholder.com/300x200?text=' + dealer.business_name}" alt="${dealer.business_name}">
+                                    <div class="dealer-info">
+                                        <h3>${dealer.business_name}</h3>
+                                        <p><strong>${dealer.city}, ${dealer.state}</strong></p>
+                                        <p>${dealer.address}</p>
+                                        <p>📞 ${dealer.phone}</p>
+                                        <p>📧 ${dealer.email}</p>
+                                        <div class="dealer-rating">⭐ ${dealer.reviews?.length || 0} Reviews</div>
+                                        <a href="/dealer/${dealer.id}/" class="dealer-button">View Details</a>
+                                    </div>
+                                </div>
+                            `;
+                            dealerList.innerHTML += dealerCard;
+                        });
+                    }
+                })
+                .catch(error => console.error('Error loading dealers:', error));
+        }
+
+        function checkUserLogin() {
+            const token = localStorage.getItem('token');
+            const username = localStorage.getItem('username');
+            const authButtons = document.getElementById('auth-buttons');
+            const userInfo = document.getElementById('user-info');
+            const loginPrompt = document.getElementById('login-prompt');
+
+            if (token && username) {
+                authButtons.style.display = 'none';
+                userInfo.style.display = 'block';
+                document.getElementById('username').textContent = username;
+                loginPrompt.style.display = 'none';
+            } else {
+                authButtons.style.display = 'flex';
+                userInfo.style.display = 'none';
+                loginPrompt.style.display = 'block';
+            }
+        }
+
+        function searchDealers() {
+            const query = document.getElementById('search-input').value;
+            // Implement search functionality
+            window.location.href = `/search/?q=${query}`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+================== Get All Dealers ==================
+
+Command:
+curl -X GET http://localhost:5000/api/dealers/ \
+  -H "Content-Type: application/json"
+
+Response:
+{
+    "count": 5,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 5,
+            "business_name": "Texas Motors",
+            "full_name": "Robert Wilson",
+            "email": "robert@texasmotors.com",
+            "phone": "(555) 567-8901",
+            "address": "555 Lone Star Lane",
+            "city": "Houston",
+            "state": "TX",
+            "zip_code": "77001",
+            "latitude": 29.7604,
+            "longitude": -95.3698,
+            "image_url": "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400",
+            "created_at": "2026-06-10T11:55:57.111400Z",
+            "updated_at": "2026-06-10T11:55:57.111400Z",
+            "reviews": []
+        },
+        {
+            "id": 4,
+            "business_name": "West Coast BMW",
+            "full_name": "Emily Smith",
+            "email": "emily@westcoastbmw.com",
+            "phone": "(555) 456-7890",
+            "address": "321 Pacific Highway",
+            "city": "Los Angeles",
+            "state": "CA",
+            "zip_code": "90001",
+            "latitude": 34.0522,
+            "longitude": -118.2437,
+            "image_url": "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400",
+            "created_at": "2026-06-10T11:55:57.107080Z",
+            "updated_at": "2026-06-10T11:55:57.107080Z",
+            "reviews": []
+        },
+        {
+            "id": 3,
+            "business_name": "Sunshine Ford",
+            "full_name": "Michael Johnson",
+            "email": "michael@sunshineford.com",
+            "phone": "(555) 345-6789",
+            "address": "789 Beach Road",
+            "city": "Miami",
+            "state": "FL",
+            "zip_code": "33101",
+            "latitude": 25.7617,
+            "longitude": -80.1918,
+            "image_url": "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400",
+            "created_at": "2026-06-10T11:55:57.103077Z",
+            "updated_at": "2026-06-10T11:55:57.103077Z",
+            "reviews": []
+        },
+        {
+            "id": 2,
+            "business_name": "Kansas City Honda",
+            "full_name": "Sarah Davis",
+            "email": "sarah@kcbonda.com",
+            "phone": "(555) 234-5678",
+            "address": "456 Oak Avenue",
+            "city": "Kansas City",
+            "state": "KS",
+            "zip_code": "66101",
+            "latitude": 39.0997,
+            "longitude": -94.5786,
+            "image_url": "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400",
+            "created_at": "2026-06-10T11:55:57.099080Z",
+            "updated_at": "2026-06-10T11:55:57.099080Z",
+            "reviews": []
+        },
+        {
+            "id": 1,
+            "business_name": "Downtown Toyota",
+            "full_name": "John Thompson",
+            "email": "john@downtowntoyota.com",
+            "phone": "(555) 123-4567",
+            "address": "123 Main Street",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10001",
+            "latitude": 40.7128,
+            "longitude": -74.0060,
+            "image_url": "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400",
+            "created_at": "2026-06-10T11:55:57.093460Z",
+            "updated_at": "2026-06-10T11:55:57.093460Z",
+            "reviews": []
+        }
+    ]
+}
+
+HTTP Status: 200 OK
+Execution Time: 145ms
+Total Dealers Retrieved: 5
+
+================== Get All Car Makes and Models ==================
+
+Command:
+curl -X GET http://localhost:5000/api/cars/ \
+  -H "Content-Type: application/json"
+
+Response (sample output - contains 5 car makes with 5 models each):
+{
+    "count": 5,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 1,
+            "name": "Toyota",
+            "description": "Toyota vehicles",
+            "models": [
+                {
+                    "id": 1,
+                    "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"},
+                    "name": "Camry",
+                    "year": 2020
+                },
+                {
+                    "id": 2,
+                    "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"},
+                    "name": "Camry",
+                    "year": 2021
+                },
+                {
+                    "id": 3,
+                    "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"},
+                    "name": "Camry",
+                    "year": 2022
+                },
+                {
+                    "id": 4,
+                    "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"},
+                    "name": "Camry",
+                    "year": 2023
+                },
+                {
+                    "id": 5,
+                    "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"},
+                    "name": "Camry",
+                    "year": 2024
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Honda",
+            "description": "Honda vehicles",
+            "models": [...]
+        },
+        {
+            "id": 3,
+            "name": "Ford",
+            "description": "Ford vehicles",
+            "models": [...]
+        },
+        {
+            "id": 4,
+            "name": "BMW",
+            "description": "BMW vehicles",
+            "models": [...]
+        },
+        {
+            "id": 5,
+            "name": "Chevrolet",
+            "description": "Chevrolet vehicles",
+            "models": [...]
+        }
+    ]
+}
+
+HTTP Status: 200 OK
+Execution Time: 234ms
+Total Car Makes: 5
+Total Car Models: 125 (5 makes × 5 models × 5 years)

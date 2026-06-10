@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Dealership Review</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        nav a.active {
+            border-bottom: 2px solid white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 2.5rem;
+            color: #667eea;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .info-details {
+            flex: 1;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #555;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>Dealership Review</h1>
+            <div>
+                <a href="/">Home</a>
+                <a href="/about/">About Us</a>
+                <a href="/contact/" class="active">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Contact Us</h1>
+
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-details">
+                        <div class="info-label">Address</div>
+                        <div class="info-value">
+                            Dealership Review Inc.<br>
+                            123 Main Street<br>
+                            New York, NY 10001<br>
+                            United States
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-details">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value">
+                            +1 (800) 123-4567<br>
+                            Monday - Friday: 9AM - 6PM EST<br>
+                            Saturday - Sunday: Closed
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📧</div>
+                    <div class="info-details">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">
+                            <a href="mailto:support@dealershipreview.com"
+                                style="color: #667eea; text-decoration: none;">support@dealershipreview.com</a><br>
+                            <a href="mailto:info@dealershipreview.com"
+                                style="color: #667eea; text-decoration: none;">info@dealershipreview.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">🕐</div>
+                    <div class="info-details">
+                        <div class="info-label">Business Hours</div>
+                        <div class="info-value">
+                            Mon - Fri: 9:00 AM - 6:00 PM<br>
+                            Saturday: 10:00 AM - 4:00 PM<br>
+                            Sunday: Closed
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://facebook.com" title="Facebook">f</a>
+                    <a href="https://twitter.com" title="Twitter">𝕏</a>
+                    <a href="https://linkedin.com" title="LinkedIn">in</a>
+                    <a href="https://instagram.com" title="Instagram">📷</a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Send us a Message</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Dealership Review. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

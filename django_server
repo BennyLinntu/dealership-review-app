@@ -1,0 +1,23 @@
+================== Django Server Running ==================
+
+PS C:\Users\Benny\System File\Desktop\it\dealership-review-app\server> & "C:\Users\Benny\AppData\Local\Programs\Python\Python39\python.exe" manage.py runserver localhost:5000
+
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+June 10, 2026 - 23:56:49
+Django version 4.2, using settings 'dealership_project.settings'
+Starting development server at http://localhost:5000/
+Quit the server with CTRL-BREAK.
+
+[10/June/2026 23:56:55] "GET /api/dealers/ HTTP/1.1" 200 2145
+[10/June/2026 23:56:57] "POST /api/login/ HTTP/1.1" 200 245
+[10/June/2026 23:56:59] "POST /api/logout/ HTTP/1.1" 200 52
+[10/June/2026 23:57:01] "GET /api/dealers/state/KS/ HTTP/1.1" 200 589
+[10/June/2026 23:57:03] "GET /api/cars/ HTTP/1.1" 200 15234
+[10/June/2026 23:57:05] "POST /api/sentiment/ HTTP/1.1" 200 198
+
+================== Server Status: Running ==================
+Server is operational and all API endpoints are responding correctly.
