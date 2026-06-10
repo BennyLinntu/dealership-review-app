@@ -1,16 +1,18 @@
 # Dealership Review Application - Submission Guide
 
 ## Project Overview
+
 A full-stack Django REST API and React frontend application for managing dealership information, customer reviews, and sentiment analysis.
 
-**Project Repository**: https://github.com/BennyLinntu/dealership-review-app (to be created)
+**Project Repository**: <https://github.com/BennyLinntu/dealership-review-app> (to be created)
 
 ---
 
 ## How to Create GitHub Repository and Push Code
 
 ### Step 1: Create Repository on GitHub
-1. Go to https://github.com/BennyLinntu
+
+1. Go to <https://github.com/BennyLinntu>
 2. Click the "+" icon in the top right corner
 3. Select "New repository"
 4. Repository name: `dealership-review-app`
@@ -20,6 +22,7 @@ A full-stack Django REST API and React frontend application for managing dealers
 8. Click "Create repository"
 
 ### Step 2: Push Code to GitHub
+
 Run these commands in PowerShell:
 
 ```powershell
@@ -30,6 +33,7 @@ git push -u origin main
 ```
 
 You should see output like:
+
 ```
 Enumerating objects: 50, done.
 Counting objects: 100% (50/50), done.
@@ -43,19 +47,23 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 ## Complete Task Deliverables
 
 ### Task 1: README.md ✅
-**File Location**: https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md
+
+**File Location**: <https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md>
 **Status**: Complete
 **Contents**: Project name, overview, tech stack, features, API endpoints, setup instructions
 
 ### Task 2: Django Server Running ✅
+
 **File Location**: `django_server` in repository root
 **Status**: Complete
 **Contents**: Terminal output showing Django server running on localhost:5000
 
 ### Task 3: About Us Page ✅
-**File Location**: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html
+
+**File Location**: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html>
 **Status**: Complete
 **Features**:
+
 - Professional team member cards with photos
 - Names: John Thompson (CEO), Sarah Johnson (CTO), Michael Chen (PM), Emily Rodriguez (Marketing), David Wilson (Support)
 - All contact emails provided
@@ -63,9 +71,11 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 - Navigation bar highlighting current page
 
 ### Task 4: Contact Us Page ✅
-**File Location**: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html
+
+**File Location**: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html>
 **Status**: Complete
 **Features**:
+
 - Complete contact information (address, phone, email)
 - Contact form with Name, Email, Phone, Subject, Message fields
 - Business hours display
@@ -74,9 +84,11 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 - CSS styling with gradients
 
 ### Task 5: Login cURL Command ✅
+
 **File Location**: `loginuser` in repository root
 **Status**: Complete
 **Sample Output**:
+
 ```json
 {
     "token": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
@@ -88,9 +100,11 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
 
 ### Task 6: Logout cURL Command ✅
+
 **File Location**: `logoutuser` in repository root
 **Status**: Complete
 **Sample Output**:
+
 ```json
 {
     "message": "Logout successful"
@@ -98,9 +112,11 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
 
 ### Task 7: Register Component ✅
-**File Location**: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx
+
+**File Location**: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx>
 **Status**: Complete
 **Input Fields**:
+
 1. Username
 2. First Name
 3. Last Name
@@ -109,14 +125,17 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 **Additional Files**: Register.css (styling)
 
 ### Task 8: Get Reviews cURL Command ✅
+
 **File Location**: `getdatalibraries` (first section)
 **Status**: Complete
 **Endpoint**: GET /api/reviews/2/ (shows reviews for dealer ID 2)
 
 ### Task 9: Get All Dealers cURL Command ✅
+
 **File Location**: `getdatalibraries` (second section)
 **Status**: Complete
 **Output**: 5 dealers with complete details
+
 ```
 - Texas Motors (Houston, TX)
 - West Coast BMW (Los Angeles, CA)
@@ -126,22 +145,26 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
 
 ### Task 10: Get Dealer by ID cURL Command ✅
+
 **File Location**: `getdatalibrary` in repository root
 **Status**: Complete
 **Endpoint**: GET /api/dealers/2/
 **Returns**: Kansas City Honda complete details
 
 ### Task 11: Get Dealers by State cURL Command ✅
+
 **File Location**: `getdatalibraryState` in repository root
 **Status**: Complete
 **Endpoint**: GET /api/dealers/state/KS/
 **Returns**: 1 dealer (Kansas City Honda)
 
 ### Task 12: Admin Login Screenshot ⏳ PENDING
+
 **Screenshot Name**: `admin_login.png` or `admin_login.jpeg`
 **How to Create**:
+
 1. Start Django server (already running)
-2. Go to http://localhost:5000/admin/
+2. Go to <http://localhost:5000/admin/>
 3. Login with:
    - Username: `admin`
    - Password: `admin123`
@@ -149,16 +172,20 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 5. Save as `admin_login.png` in repository root
 
 ### Task 13: Admin Logout Screenshot ⏳ PENDING
+
 **Screenshot Name**: `admin_logout.png` or `admin_logout.jpeg`
 **How to Create**:
+
 1. Click logout in admin panel
 2. Take screenshot showing logout success page
 3. Save as `admin_logout.png` in repository root
 
 ### Task 14-15: Cars/Makes/Models cURL Command ✅
+
 **File Location**: `getdatalibraries` (third section)
 **Status**: Complete
 **Output**: 5 car manufacturers with 5 models each (2020-2024)
+
 - Toyota: Camry, Corolla, Prius, Highlander, RAV4
 - Honda: Civic, Accord, CR-V, Odyssey, Pilot
 - Ford: F-150, Mustang, Fusion, Edge, Explorer
@@ -166,10 +193,12 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 - Chevrolet: Silverado, Camaro, Malibu, Equinox, Tahoe
 
 ### Task 16: Sentiment Analysis cURL Command ✅
+
 **File Location**: `analyzeReview` in repository root
 **Status**: Complete
 **Input**: "Fantastic services"
 **Output**:
+
 ```json
 {
     "text": "Fantastic services",
@@ -180,16 +209,20 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
 
 ### Task 17: Home Page Before Login ⏳ PENDING
+
 **Screenshot Name**: `get_delivers.png` or `get_delivers.jpeg`
 **How to Create**:
-1. Go to http://localhost:5000/
+
+1. Go to <http://localhost:5000/>
 2. Take screenshot showing all 5 dealers
 3. Show the Sign In / Sign Up buttons visible
 4. Save screenshot as `get_delivers.png`
 
 ### Task 18: Home Page After Login ⏳ PENDING
+
 **Screenshot Name**: `get_delivers_loggedin.jpeg`
 **How to Create**:
+
 1. Login with test account
 2. Go to home page
 3. Take screenshot showing:
@@ -200,18 +233,22 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 4. Save as `get_delivers_loggedin.jpeg`
 
 ### Task 19: Dealers Filtered by State ⏳ PENDING
+
 **Screenshot Name**: `dealersbystate.png` or `dealersbystate.jpeg`
 **How to Create**:
+
 1. Implement state filter on frontend (or access API directly)
-2. Filter for Kansas state: http://localhost:5000/api/dealers/state/KS/
+2. Filter for Kansas state: <http://localhost:5000/api/dealers/state/KS/>
 3. Take screenshot showing:
    - Filtered results (Kansas City Honda)
    - Endpoint visible in address bar
 4. Save as `dealersbystate.png`
 
 ### Task 20: Dealer Details with Reviews ⏳ PENDING
+
 **Screenshot Name**: `dealer_id_reviews.png` or `dealer_id_reviews.jpeg`
 **How to Create**:
+
 1. Click on a dealer to view details
 2. Show the reviews section
 3. Take screenshot including:
@@ -221,8 +258,10 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 4. Save as `dealer_id_reviews.png`
 
 ### Task 21: Review Submission Form ⏳ PENDING
+
 **Screenshot Name**: `dealershi_review_submission.png` or `dealershi_review_submission.jpeg`
 **How to Create**:
+
 1. Navigate to a dealer's review page
 2. Show the review submission form filled with details:
    - Rating (1-5 stars)
@@ -231,8 +270,10 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 4. Save as `dealershi_review_submission.png`
 
 ### Task 22: Posted Review Confirmation ⏳ PENDING
+
 **Screenshot Name**: `added_review.png` or `added_review.jpeg`
 **How to Create**:
+
 1. Submit a review on a dealer's page
 2. Take screenshot showing:
    - Successfully posted review
@@ -241,9 +282,11 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 3. Save as `added_review.png`
 
 ### Task 23: GitHub Actions Workflow ✅
+
 **File Location**: `CICD` in repository root
 **Status**: Complete
 **Contents**: Workflow execution showing all steps:
+
 - Checkout code
 - Setup Python 3.10
 - Install dependencies
@@ -253,24 +296,29 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 - Deploy to production
 
 ### Task 24: Deployment URL ✅
+
 **File Location**: `deploymentURL` in repository root
 **Status**: Complete
-**Content**: https://dealership-review-app.herokuapp.com
+**Content**: <https://dealership-review-app.herokuapp.com>
 **Note**: Need to deploy to actual platform
 
 ### Task 25: Deployed Landing Page ⏳ PENDING
+
 **Screenshot Name**: `deployed_landingpage.png` or `deployed_landingpage.jpeg`
 **How to Create**: After deployment, take screenshot of landing page
 
 ### Task 26: Deployed Logged-in Page ⏳ PENDING
+
 **Screenshot Name**: `deployed_loggedin.jpeg`
 **How to Create**: After deployment, login and take screenshot showing username
 
 ### Task 27: Deployed Dealer Details ⏳ PENDING
+
 **Screenshot Name**: `deployed_dealer_detail.png` or `deployed_dealer_detail.jpeg`
 **How to Create**: After deployment, navigate to dealer details page and take screenshot
 
 ### Task 28: Deployed Review ⏳ PENDING
+
 **Screenshot Name**: `deployed_add_review.png` or `deployed_add_review.jpeg`
 **How to Create**: After deployment, show posted review and take screenshot
 
@@ -363,7 +411,8 @@ dealership-review-app/
 **Pending**: 12/28 tasks ⏳
 **Points Earned**: ~22/50 points
 
-### Next Steps:
+### Next Steps
+
 1. ✅ Create GitHub repository (use link above)
 2. ✅ Push code to GitHub (use commands above)
 3. ⏳ Capture remaining screenshots (18 screenshots total)

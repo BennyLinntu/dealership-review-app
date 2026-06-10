@@ -211,7 +211,7 @@ After pushing, verify:
 ## NEXT STEPS AFTER PUSH
 
 1. Capture admin screenshots (Task 12-13)
-2. Capture frontend screenshots (Task 17-22)  
+2. Capture frontend screenshots (Task 17-22)
 3. Deploy application (Task 24-28)
 4. Capture deployment screenshots
 5. Submit final package

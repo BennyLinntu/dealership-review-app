@@ -1,9 +1,10 @@
 # Complete Project Summary & GitHub URLs
 
 ## Project: Dealership Review Application
+
 **Created**: June 10, 2026
 **Local Path**: `c:\Users\Benny\System File\Desktop\it\dealership-review-app\`
-**Repository to Create**: https://github.com/BennyLinntu/dealership-review-app
+**Repository to Create**: <https://github.com/BennyLinntu/dealership-review-app>
 
 ---
 
@@ -76,7 +77,7 @@ Configuration:
 ### Screenshots to Create (Total: 12)
 
 1. **admin_login.png** - Admin login page
-   - Endpoint: http://localhost:5000/admin/
+   - Endpoint: <http://localhost:5000/admin/>
    - Credentials: admin / admin123
 
 2. **admin_logout.png** - Admin logout confirmation
@@ -124,6 +125,7 @@ Configuration:
 ### Step 1: Push to GitHub
 
 Open PowerShell and run:
+
 ```powershell
 cd "c:\Users\Benny\System File\Desktop\it\dealership-review-app"
 git remote add origin https://github.com/BennyLinntu/dealership-review-app.git
@@ -132,10 +134,12 @@ git push -u origin main
 ```
 
 ### Step 2: Verify Repository Created
-Visit: https://github.com/BennyLinntu/dealership-review-app
+
+Visit: <https://github.com/BennyLinntu/dealership-review-app>
 You should see all 50+ files committed.
 
 ### Step 3: Capture Admin Screenshots (Tasks 12-13)
+
 ```
 1. Django server is already running on localhost:5000
 2. Go to: http://localhost:5000/admin/
@@ -148,7 +152,9 @@ You should see all 50+ files committed.
 ```
 
 ### Step 4: Capture Frontend Screenshots (Tasks 17-22)
+
 The home page and dealer pages require a proper frontend setup:
+
 ```
 Current status: HTML/React components created
 Required: Set up a web server to serve these pages
@@ -157,16 +163,18 @@ Option 2: Set up Node.js/React development server
 ```
 
 Django is serving:
-- http://localhost:5000/ → index.html
-- http://localhost:5000/about/ → About.html
-- http://localhost:5000/contact/ → Contact.html
-- http://localhost:5000/api/ → All API endpoints
+
+- <http://localhost:5000/> → index.html
+- <http://localhost:5000/about/> → About.html
+- <http://localhost:5000/contact/> → Contact.html
+- <http://localhost:5000/api/> → All API endpoints
 
 ### Step 5: Deploy Application (Tasks 24-28)
 
 Choose one platform:
 
 **Option A: Heroku (Recommended)**
+
 ```bash
 # Install Heroku CLI
 # Login: heroku login
@@ -176,11 +184,13 @@ Choose one platform:
 ```
 
 **Option B: AWS / Azure / Google Cloud**
+
 ```
 Configure and deploy using platform-specific instructions
 ```
 
 ### Step 6: Capture Deployment Screenshots
+
 After deployment, visit the deployed URL and capture screenshots for tasks 25-28.
 
 ---
@@ -188,6 +198,7 @@ After deployment, visit the deployed URL and capture screenshots for tasks 25-28
 ## 📊 Task Completion Summary
 
 ### Completed (16 tasks - 22 points)
+
 - ✅ Task 1: README.md
 - ✅ Task 2: Django Server
 - ✅ Task 3: About Us Page
@@ -206,6 +217,7 @@ After deployment, visit the deployed URL and capture screenshots for tasks 25-28
 - ✅ (Supporting): Complete Backend API
 
 ### Pending (12 tasks - 18 points)
+
 - ⏳ Task 12: Admin Login Screenshot
 - ⏳ Task 13: Admin Logout Screenshot
 - ⏳ Task 17: Home Page (No Login)
@@ -224,13 +236,15 @@ After deployment, visit the deployed URL and capture screenshots for tasks 25-28
 ## 🔗 Key URLs
 
 ### Local Development (Running Now)
-- API Base: http://localhost:5000/api/
-- Home: http://localhost:5000/
-- About: http://localhost:5000/about/
-- Contact: http://localhost:5000/contact/
-- Admin: http://localhost:5000/admin/ (admin/admin123)
+
+- API Base: <http://localhost:5000/api/>
+- Home: <http://localhost:5000/>
+- About: <http://localhost:5000/about/>
+- Contact: <http://localhost:5000/contact/>
+- Admin: <http://localhost:5000/admin/> (admin/admin123)
 
 ### API Endpoints (Functional)
+
 - GET /api/dealers/
 - GET /api/dealers/{id}/
 - GET /api/dealers/state/{state}/
@@ -243,11 +257,12 @@ After deployment, visit the deployed URL and capture screenshots for tasks 25-28
 - POST /api/sentiment/
 
 ### GitHub (After Push)
-- Repository: https://github.com/BennyLinntu/dealership-review-app
-- README: https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md
-- About.html: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html
-- Contact.html: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html
-- Register.jsx: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx
+
+- Repository: <https://github.com/BennyLinntu/dealership-review-app>
+- README: <https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md>
+- About.html: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html>
+- Contact.html: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html>
+- Register.jsx: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx>
 
 ---
 
@@ -264,6 +279,7 @@ All files are ready to push to GitHub.
 ## ✨ Key Features Implemented
 
 ### Backend
+
 - ✅ Django REST Framework API
 - ✅ Token-based Authentication
 - ✅ Dealer Management
@@ -276,6 +292,7 @@ All files are ready to push to GitHub.
 - ✅ Comprehensive Serializers
 
 ### Frontend
+
 - ✅ Responsive HTML Pages
 - ✅ About Us Page (Task 3)
 - ✅ Contact Us Page (Task 4)
@@ -285,6 +302,7 @@ All files are ready to push to GitHub.
 - ✅ Navigation Bars
 
 ### DevOps
+
 - ✅ GitHub Actions CI/CD
 - ✅ SQLite Database
 - ✅ Git Repository Setup
@@ -296,6 +314,7 @@ All files are ready to push to GitHub.
 ## 🎯 Next Steps (Priority Order)
 
 1. **URGENT**: Push to GitHub (5 minutes)
+
    ```powershell
    cd "c:\Users\Benny\System File\Desktop\it\dealership-review-app"
    git remote add origin https://github.com/BennyLinntu/dealership-review-app.git

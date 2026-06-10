@@ -1,6 +1,6 @@
-https://dealership-review-app.herokuapp.com
+<https://dealership-review-app.herokuapp.com>
 
 Note: This is the deployment URL for the Dealership Review Application.
 The application is deployed on Heroku and accessible at the above URL.
 
-For local development, use: http://localhost:5000/
+For local development, use: <http://localhost:5000/>

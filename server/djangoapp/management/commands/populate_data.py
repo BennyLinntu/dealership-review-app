@@ -96,9 +96,11 @@ class Command(BaseCommand):
                 defaults=dealer_data
             )
             if created:
-                self.stdout.write(self.style.SUCCESS(f'Created dealer: {dealer.business_name}'))
+                self.stdout.write(self.style.SUCCESS(
+                    f'Created dealer: {dealer.business_name}'))
             else:
-                self.stdout.write(f'Dealer already exists: {dealer.business_name}')
+                self.stdout.write(
+                    f'Dealer already exists: {dealer.business_name}')
 
         # Create car makes and models
         self.stdout.write('Creating cars...')
@@ -108,8 +110,9 @@ class Command(BaseCommand):
                 defaults={'description': f'{make_name} vehicles'}
             )
             if created:
-                self.stdout.write(self.style.SUCCESS(f'Created car make: {make_name}'))
-            
+                self.stdout.write(self.style.SUCCESS(
+                    f'Created car make: {make_name}'))
+
             for model_name in models:
                 for year in range(2020, 2025):
                     model, created = CarModel.objects.get_or_create(
@@ -118,6 +121,7 @@ class Command(BaseCommand):
                         year=year
                     )
                     if created:
-                        self.stdout.write(f'Created car model: {make_name} {model_name} ({year})')
+                        self.stdout.write(
+                            f'Created car model: {make_name} {model_name} ({year})')
 
         self.stdout.write(self.style.SUCCESS('Database population complete!'))
