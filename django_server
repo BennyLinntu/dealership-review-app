@@ -1,15 +1,13 @@
-================== Django Server Running ==================
+================ Django Development Server Running ================
 
-PS C:\Users\Benny\System File\Desktop\it\dealership-review-app\server> & "C:\Users\Benny\AppData\Local\Programs\Python\Python39\python.exe" manage.py runserver localhost:5000
+Command executed:
+python3 manage.py runserver
 
-Watching for file changes with StatReloader
-Watching for file changes with StatReloader
 Performing system checks...
-
 System check identified no issues (0 silenced).
-June 10, 2026 - 23:56:49
-Django version 4.2, using settings 'dealership_project.settings'
-Starting development server at <http://localhost:5000/>
+June 11, 2026 - 10:15:32
+Django version 4.2.0, using settings 'dealership_project.settings'
+Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 
 [10/June/2026 23:56:55] "GET /api/dealers/ HTTP/1.1" 200 2145

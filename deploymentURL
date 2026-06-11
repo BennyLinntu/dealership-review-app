@@ -1,7 +1,7 @@
-<https://bennylinntu-8000.proxy.cognitiveclass.ai>
+https://theiadockernext-1-8000.proxy.cognitiveclass.ai
 
 Note: This is the deployment URL for the Dealership Review Application.
 The application is deployed on IBM Skills Network / Cognitive Class platform.
-Format: https://<username>-8000.proxy.cognitiveclass.ai
+Format: https://theiadockernext-<positive_integer>-8000.proxy.cognitiveclass.ai
 
-For local development, use: <http://localhost:8000/>
+For local development, use: http://localhost:8000/
