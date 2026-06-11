@@ -236,7 +236,10 @@
                 <div class="review-header">
                     <div>
                         <span class="reviewer-name">{{ review.user.username|default:"Anonymous" }}</span>
-                        <div class="stars">{% if review.rating >= 1 %}★{% else %}☆{% endif %}{% if review.rating >= 2 %}★{% else %}☆{% endif %}{% if review.rating >= 3 %}★{% else %}☆{% endif %}{% if review.rating >= 4 %}★{% else %}☆{% endif %}{% if review.rating >= 5 %}★{% else %}☆{% endif %}</div>
+                        <div class="stars">{% if review.rating >= 1 %}★{% else %}☆{% endif %}{% if review.rating >= 2
+                            %}★{% else %}☆{% endif %}{% if review.rating >= 3 %}★{% else %}☆{% endif %}{% if
+                            review.rating >= 4 %}★{% else %}☆{% endif %}{% if review.rating >= 5 %}★{% else %}☆{% endif
+                            %}</div>
                     </div>
                     <div style="display:flex;align-items:center;gap:10px;">
                         {% if review.sentiment == "positive" %}

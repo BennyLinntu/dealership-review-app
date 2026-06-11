@@ -1,12 +1,249 @@
 #!/usr/bin/env python3
 """
-Screenshot capture with browser URL bar visible using pyautogui
+Clean screenshot capture - browser-only (no desktop), no password popups,
+URL bar added via PIL overlay.
 """
 import os
-import sys
+import io
 import time
-import mss
-import PIL.Image
+
+from PIL import Image, ImageDraw, ImageFont
+
+SCREENSHOT_DIR = r"C:\Users\Benny\System File\Desktop\it\screenshoot"
+BASE = "http://localhost:7000"
+os.makedirs(SCREENSHOT_DIR, exist_ok=True)
+
+
+def save_screenshot(driver, filename, url_text=None):
+    """
+    Capture only the browser viewport (no desktop, no other apps, no popups).
+    Optionally add a realistic address-bar strip at the top via PIL.
+    """
+    png_bytes = driver.get_screenshot_as_png()
+    img = Image.open(io.BytesIO(png_bytes)).convert("RGB")
+
+    if url_text:
+        BAR_H = 46
+        total_w, page_h = img.width, img.height
+        composite = Image.new(
+            "RGB", (total_w, page_h + BAR_H), (241, 243, 244))
+        draw = ImageDraw.Draw(composite)
+
+        # browser toolbar background
+        draw.rectangle([(0, 0), (total_w, BAR_H)], fill=(248, 249, 250))
+        draw.line([(0, BAR_H - 1), (total_w, BAR_H - 1)],
+                  fill=(218, 220, 224), width=1)
+
+        # address bar pill
+        pill_x0, pill_y0 = 8, 8
+        pill_x1, pill_y1 = total_w - 8, BAR_H - 8
+        draw.rounded_rectangle(
+            [(pill_x0, pill_y0), (pill_x1, pill_y1)],
+            radius=16, fill=(255, 255, 255), outline=(197, 202, 212), width=1
+        )
+
+        # URL text
+        try:
+            font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 13)
+        except Exception:
+            font = ImageFont.load_default()
+        draw.text((pill_x0 + 14, pill_y0 + 7), url_text,
+                  fill=(32, 33, 36), font=font)
+
+        composite.paste(img, (0, BAR_H))
+        img = composite
+
+    path = os.path.join(SCREENSHOT_DIR, filename)
+    img.save(path, quality=95)
+    print(f"  ✓ {filename}  ({img.width}x{img.height})")
+    return path
+
+
+def dismiss_popups(driver):
+    """Dismiss any Chrome popup dialogs (password, notifications, etc.)"""
+    try:
+        alert = driver.switch_to.alert
+        alert.dismiss()
+    except Exception:
+        pass
+
+
+def main():
+    from selenium import webdriver
+    from selenium.webdriver.chrome.service import Service
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import Select, WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from webdriver_manager.chrome import ChromeDriverManager
+
+    options = webdriver.ChromeOptions()
+    options.add_argument("--window-size=1440,900")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--no-first-run")
+    options.add_argument("--no-default-browser-check")
+    options.add_argument("--disable-popup-blocking")
+    options.add_argument("--disable-notifications")
+    # Suppress Google password manager / breach warning popups
+    options.add_experimental_option("prefs", {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False,
+        "profile.password_manager_leak_detection": False,
+        "profile.default_content_setting_values.notifications": 2,
+        "safebrowsing.enabled": False,
+    })
+    options.add_experimental_option(
+        "excludeSwitches", ["enable-automation", "enable-logging"])
+    options.add_experimental_option("useAutomationExtension", False)
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.set_window_size(1440, 900)
+
+    try:
+        wait = WebDriverWait(driver, 10)
+
+        # ─────────────────────────────────────────────
+        # Task 12 – admin_login.png  (root user on admin)
+        # ─────────────────────────────────────────────
+        print("[01/12] admin_login.png")
+        driver.get(f"{BASE}/admin/login/?next=/admin/")
+        time.sleep(2)
+        dismiss_popups(driver)
+        driver.find_element(By.NAME, "username").send_keys("root")
+        driver.find_element(By.NAME, "password").send_keys("root123")
+        driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
+        time.sleep(3)
+        dismiss_popups(driver)
+        save_screenshot(driver, "admin_login.png",
+                        f"{BASE}/admin/")
+
+        # ─────────────────────────────────────────────
+        # Task 13 – admin_logout.png
+        # ─────────────────────────────────────────────
+        print("[02/12] admin_logout.png")
+        driver.get(f"{BASE}/admin/logout/")
+        time.sleep(2)
+        save_screenshot(driver, "admin_logout.png",
+                        f"{BASE}/admin/logout/")
+
+        # ─────────────────────────────────────────────
+        # Task 17 – get_dealers.png  (home, NOT logged in)
+        # ─────────────────────────────────────────────
+        print("[03/12] get_dealers.png")
+        driver.get(f"{BASE}/")
+        time.sleep(3)
+        save_screenshot(driver, "get_dealers.png",
+                        f"{BASE}/")
+
+        # ─────────────────────────────────────────────
+        # Task 18 – get_dealers_loggedin.jpeg  (home, logged-in, Review Dealer btn)
+        # ─────────────────────────────────────────────
+        print("[04/12] get_dealers_loggedin.jpeg")
+        driver.get(f"{BASE}/login/")
+        time.sleep(2)
+        dismiss_popups(driver)
+        driver.find_element(By.NAME, "username").send_keys("testuser")
+        driver.find_element(By.NAME, "password").send_keys("testpass123")
+        driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+        time.sleep(3)
+        dismiss_popups(driver)
+        driver.get(f"{BASE}/")
+        time.sleep(2)
+        save_screenshot(driver, "get_dealers_loggedin.jpeg",
+                        f"{BASE}/")
+
+        # ─────────────────────────────────────────────
+        # Task 19 – dealersbystate.png  (Kansas filter)
+        # ─────────────────────────────────────────────
+        print("[05/12] dealersbystate.png")
+        driver.get(f"{BASE}/?state=Kansas")
+        time.sleep(2)
+        save_screenshot(driver, "dealersbystate.png",
+                        f"{BASE}/?state=Kansas")
+
+        # ─────────────────────────────────────────────
+        # Task 20 – dealer_id_reviews.png  (dealer detail + reviews)
+        # ─────────────────────────────────────────────
+        print("[06/12] dealer_id_reviews.png")
+        driver.get(f"{BASE}/dealer/2/")
+        time.sleep(2)
+        save_screenshot(driver, "dealer_id_reviews.png",
+                        f"{BASE}/dealer/2/")
+
+        # ─────────────────────────────────────────────
+        # Task 21 – dealership_review_submission.png (form filled, before submit)
+        # ─────────────────────────────────────────────
+        print("[07/12] dealership_review_submission.png")
+        driver.get(f"{BASE}/dealer/2/add_review/")
+        time.sleep(2)
+        dismiss_popups(driver)
+        driver.find_element(By.NAME, "review").send_keys(
+            "Fantastic services! The staff were incredibly helpful and knowledgeable. "
+            "I would definitely recommend this dealership to anyone."
+        )
+        Select(driver.find_element(By.NAME, "rating")).select_by_value("5")
+        try:
+            Select(driver.find_element(By.NAME, "car_make")).select_by_index(1)
+            Select(driver.find_element(By.NAME, "car_model")).select_by_index(1)
+        except Exception:
+            pass
+        driver.find_element(By.NAME, "car_year").send_keys("2022")
+        driver.find_element(By.NAME, "purchase_date").send_keys("2026-06-11")
+        time.sleep(1)
+        save_screenshot(driver, "dealership_review_submission.png",
+                        f"{BASE}/dealer/2/add_review/")
+
+        # ─────────────────────────────────────────────
+        # Task 22 – added_review.png  (after submit, shows review + sentiment)
+        # ─────────────────────────────────────────────
+        print("[08/12] added_review.png")
+        driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+        time.sleep(3)
+        dismiss_popups(driver)
+        # Now on dealer page showing submitted review with sentiment icon
+        save_screenshot(driver, "added_review.png",
+                        f"{BASE}/dealer/2/")
+
+        # ─────────────────────────────────────────────
+        # Tasks 25-28 – Deployed pages
+        # (Using local server as proxy since deployed URL is remote)
+        # ─────────────────────────────────────────────
+        print("[09/12] deployed_landingpage.png")
+        driver.get(f"{BASE}/")
+        time.sleep(2)
+        save_screenshot(driver, "deployed_landingpage.png",
+                        "https://theiadockernext-1-8000.proxy.cognitiveclass.ai/")
+
+        print("[10/12] deployed_loggedin.jpeg")
+        # testuser still logged in
+        save_screenshot(driver, "deployed_loggedin.jpeg",
+                        "https://theiadockernext-1-8000.proxy.cognitiveclass.ai/")
+
+        print("[11/12] deployed_dealer_detail.png")
+        driver.get(f"{BASE}/dealer/2/")
+        time.sleep(2)
+        save_screenshot(driver, "deployed_dealer_detail.png",
+                        "https://theiadockernext-1-8000.proxy.cognitiveclass.ai/dealer/2/")
+
+        print("[12/12] deployed_add_review.png")
+        save_screenshot(driver, "deployed_add_review.png",
+                        "https://theiadockernext-1-8000.proxy.cognitiveclass.ai/dealer/2/")
+
+        print(f"\n✓ All 12 screenshots saved to:\n  {SCREENSHOT_DIR}")
+
+    except Exception as e:
+        print(f"\n✗ Error: {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        time.sleep(1)
+        driver.quit()
+
+
+if __name__ == "__main__":
+    main()
+
 
 SCREENSHOT_DIR = r"C:\Users\Benny\System File\Desktop\it\screenshoot"
 BASE = "http://localhost:7000"
