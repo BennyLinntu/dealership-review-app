@@ -4,17 +4,20 @@ COMPREHENSIVE ANSWERS FOR TASKS 1-28 - DEALERSHIP REVIEW APPLICATION
 
 TASK 1: Submit README.md URL with Repository Name and Project Name
 ================================================================================
-URL: https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md
+
+URL: <https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md>
 
 Content includes:
+
 - Repository name: dealership-review-app
 - Project name: Dealership Review System
-- Full-stack Django and React application for managing dealership information, 
+- Full-stack Django and React application for managing dealership information,
   customer reviews, and sentiment analysis.
 
 ================================================================================
 TASK 2: Terminal Output - Django Server Running
 ================================================================================
+
 File: django_server
 
 Command executed: python3 manage.py runserver
@@ -29,7 +32,7 @@ Performing system checks...
 System check identified no issues (0 silenced).
 June 11, 2026 - 10:15:32
 Django version 4.2.0, using settings 'dealership_project.settings'
-Starting development server at http://127.0.0.1:8000/
+Starting development server at <http://127.0.0.1:8000/>
 Quit the server with CTRL-BREAK.
 
 [11/June/2026 10:15:32] "GET /djangoapp/login HTTP/1.1" 200 185
@@ -47,9 +50,11 @@ Server is operational and all API endpoints are responding correctly.
 ================================================================================
 TASK 3: About Us Page URL
 ================================================================================
-URL: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html
+
+URL: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html>
 
 Location: server/frontend/static/About.html
+
 - Updated "About Us" page with correct CSS links
 - Realistic images with team member information
 - Names, roles, brief details, and email IDs included
@@ -58,9 +63,11 @@ Location: server/frontend/static/About.html
 ================================================================================
 TASK 4: Contact Us Page URL
 ================================================================================
-URL: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html
+
+URL: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html>
 
 Location: server/frontend/static/Contact.html
+
 - Navigation bar with active indicator on "Contact Us"
 - Complete contact details: address, phone, email, business hours
 - Contact form with multiple input fields
@@ -70,17 +77,18 @@ Location: server/frontend/static/Contact.html
 ================================================================================
 TASK 5: Login cURL Command and Output
 ================================================================================
+
 File: loginuser
 
 Command:
-curl -X POST http://localhost:8000/djangoapp/login \
+curl -X POST <http://localhost:8000/djangoapp/login> \
   -H "Content-Type: application/json" \
   -d "{\"userName\": \"testuser\", \"password\": \"testpass123\"}"
 
 Response:
 {
     "userName": "testuser",
-    "userEmail": "testuser@example.com",
+    "userEmail": "<testuser@example.com>",
     "firstName": "Test",
     "lastName": "User",
     "status": "Authenticated",
@@ -92,10 +100,11 @@ HTTP Status: 200 OK
 ================================================================================
 TASK 6: Logout cURL Command and Output
 ================================================================================
+
 File: logoutuser
 
 Command:
-curl -X GET http://localhost:8000/djangoapp/logout
+curl -X GET <http://localhost:8000/djangoapp/logout>
 
 Response:
 {
@@ -107,9 +116,11 @@ HTTP Status: 200 OK
 ================================================================================
 TASK 7: Register Component URL
 ================================================================================
-URL: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx
+
+URL: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx>
 
 Location: server/frontend/src/components/Register/Register.jsx
+
 - Sign-up page component with all 5 required input fields:
   1. Username
   2. First Name
@@ -123,10 +134,11 @@ Location: server/frontend/src/components/Register/Register.jsx
 ================================================================================
 TASK 8: Get Dealer Reviews cURL Command and Output
 ================================================================================
+
 File: getdealerreviews
 
 Command:
-curl -X GET http://localhost:8000/fetchReviews/dealer/2
+curl -X GET <http://localhost:8000/fetchReviews/dealer/2>
 
 Response includes:
 {
@@ -152,12 +164,14 @@ HTTP Status: 200 OK
 ================================================================================
 TASK 9: Get All Dealers cURL Command and Output
 ================================================================================
+
 File: getalldealers
 
 Command:
-curl -X GET http://localhost:8000/fetchDealers
+curl -X GET <http://localhost:8000/fetchDealers>
 
 Response includes all 50 dealers with complete information:
+
 - ID
 - Full Name
 - Business Name
@@ -183,10 +197,11 @@ Total: 50 dealers across all US states
 ================================================================================
 TASK 10: Get Dealer by ID cURL Command and Output
 ================================================================================
+
 File: getdealerbyid
 
 Command:
-curl -X GET http://localhost:8000/fetchDealer/2
+curl -X GET <http://localhost:8000/fetchDealer/2>
 
 Response:
 {
@@ -207,10 +222,11 @@ All required fields included: id, full_name, city, state, zip, lat, long
 ================================================================================
 TASK 11: Get Dealers by State (Kansas) cURL Command and Output
 ================================================================================
+
 File: getdealersbyState
 
 Command:
-curl -X GET http://localhost:8000/fetchDealers/Kansas
+curl -X GET <http://localhost:8000/fetchDealers/Kansas>
 
 Response:
 {
@@ -226,9 +242,11 @@ Complete information for all dealers in Kansas with proper fields
 ================================================================================
 TASK 12: Admin Login Screenshot
 ================================================================================
+
 File: admin_login.png
 
 Screenshot showing:
+
 - Django admin panel after successful authentication
 - Admin interface loaded and accessible
 - Username "admin" logged in
@@ -237,9 +255,11 @@ Screenshot showing:
 ================================================================================
 TASK 13: Admin Logout Screenshot
 ================================================================================
+
 File: admin_logout.png
 
 Screenshot showing:
+
 - Admin logout confirmation page
 - Session terminated
 - Logout message displayed
@@ -247,10 +267,11 @@ Screenshot showing:
 ================================================================================
 TASK 14 & 15: Get All Car Makes and Models cURL Command and Output
 ================================================================================
+
 File: getallcarmakes
 
 Command:
-curl -X GET http://localhost:8000/djangoapp/get_cars
+curl -X GET <http://localhost:8000/djangoapp/get_cars>
 
 Response with 50 CarModel entries (5 makes × 5 years):
 {
@@ -277,10 +298,11 @@ Total entries: 50
 ================================================================================
 TASK 16: Sentiment Analysis cURL Command and Output
 ================================================================================
+
 File: analyzereview
 
 Command:
-curl -X GET "http://localhost:8000/analyze/Fantastic%20services"
+curl -X GET "<http://localhost:8000/analyze/Fantastic%20services>"
 
 Response:
 {
@@ -293,9 +315,11 @@ Successfully analyzes text sentiment and returns correct value
 ================================================================================
 TASK 17: Get Dealers - Not Logged In Screenshot
 ================================================================================
+
 File: get_dealers.png
 
 Screenshot showing:
+
 - Home page of Django application
 - Dealer listing displayed
 - User NOT logged in
@@ -305,21 +329,25 @@ Screenshot showing:
 ================================================================================
 TASK 18: Get Dealers - Logged In Screenshot
 ================================================================================
+
 File: get_dealers_loggedin.jpeg
 
 Screenshot showing:
+
 - Home page after user login
 - Username "testuser" visible (logged in indicator)
 - All dealers displayed
 - Review Dealer option visible
-- Endpoint visible in browser address bar (http://localhost:8000/)
+- Endpoint visible in browser address bar (<http://localhost:8000/>)
 
 ================================================================================
 TASK 19: Dealers Filtered by State Screenshot
 ================================================================================
+
 File: dealersbystate.png
 
 Screenshot showing:
+
 - Home page with state filter applied
 - Dealers filtered for Kansas (or state of choice)
 - State filter dropdown/input visible
@@ -329,9 +357,11 @@ Screenshot showing:
 ================================================================================
 TASK 20: Dealer Details with Reviews Screenshot
 ================================================================================
+
 File: dealer_id_reviews.png
 
 Screenshot showing:
+
 - Selected dealer details page
 - Reviews section displayed
 - Review content visible
@@ -341,9 +371,11 @@ Screenshot showing:
 ================================================================================
 TASK 21: Post Review - Before Submission Screenshot
 ================================================================================
+
 File: dealership_review_submission.png
 
 Screenshot showing:
+
 - Post Review page form
 - Review details entered (before submission)
 - All form fields filled out
@@ -353,9 +385,11 @@ Screenshot showing:
 ================================================================================
 TASK 22: Posted Review Display Screenshot
 ================================================================================
+
 File: added_review.png
 
 Screenshot showing:
+
 - Review successfully posted
 - Review displayed on dealer page
 - All review details visible
@@ -365,21 +399,25 @@ Screenshot showing:
 ================================================================================
 TASK 23: GitHub Actions CI/CD Workflow Output
 ================================================================================
+
 File: CICD
 
 Complete workflow showing all jobs:
 
 Job 1: Lint Python Files
+
 - Status: SUCCESS ✓
 - Steps: Checkout, Setup Python, Install flake8, Run flake8 linting
 - Exit code: 0 (no errors)
 
-Job 2: Lint JavaScript Files  
+Job 2: Lint JavaScript Files
+
 - Status: SUCCESS ✓
 - Steps: Checkout, Setup Node.js, Install ESLint, Run ESLint
 - Exit code: 0 (no errors)
 
 Job 3: Build and Test
+
 - Status: SUCCESS ✓
 - Steps: Checkout, Setup Python, Install dependencies, Run migrations, Run tests, Collect static files
 - All tests passed
@@ -390,22 +428,25 @@ Overall status: ALL JOBS PASSED ✓
 ================================================================================
 TASK 24: Deployment URL
 ================================================================================
+
 File: deploymentURL
 
-URL: https://theiadockernext-1-8000.proxy.cognitiveclass.ai
+URL: <https://theiadockernext-1-8000.proxy.cognitiveclass.ai>
 
-Format: https://theiadockernext-<positive_integer>-8000.proxy.cognitiveclass.ai
+Format: <https://theiadockernext-><positive_integer>-8000.proxy.cognitiveclass.ai
 
 Platform: IBM Skills Network / Cognitive Class
 Port: 8000
-Local development: http://localhost:8000/
+Local development: <http://localhost:8000/>
 
 ================================================================================
 TASK 25: Deployed Landing Page Screenshot
 ================================================================================
+
 File: deployed_landingpage.png
 
 Screenshot showing:
+
 - Deployment URL in browser address bar
 - Application home page loaded successfully
 - All dealers displayed
@@ -415,9 +456,11 @@ Screenshot showing:
 ================================================================================
 TASK 26: Deployed Logged-In Page Screenshot
 ================================================================================
+
 File: deployed_loggedin.jpeg
 
 Screenshot showing:
+
 - Deployment URL in browser
 - User logged in to application
 - Username displayed in interface
@@ -427,9 +470,11 @@ Screenshot showing:
 ================================================================================
 TASK 27: Deployed Dealer Detail Page Screenshot
 ================================================================================
+
 File: deployed_dealer_detail.png
 
 Screenshot showing:
+
 - Dealer details page on deployed application
 - Individual dealer information displayed
 - URL showing deployment domain
@@ -439,9 +484,11 @@ Screenshot showing:
 ================================================================================
 TASK 28: Deployed Review Display Screenshot
 ================================================================================
+
 File: deployed_add_review.png
 
 Screenshot showing:
+
 - Review display on deployed application
 - Posted reviews visible
 - Review details showing (name, rating, sentiment, text)
@@ -485,6 +532,7 @@ CODE QUALITY & STRUCTURE
 ================================================================================
 
 Backend (Django):
+
 - All endpoints correctly implemented in views.py
 - URL routing properly configured in urls.py
 - Database models include all required fields
@@ -493,6 +541,7 @@ Backend (Django):
 - 50 dealers + 50 car models in database
 
 Frontend:
+
 - HTML pages with proper styling
 - React component for registration with 5 required fields
 - Navigation bar with active state indicators
@@ -500,12 +549,14 @@ Frontend:
 - Login/logout functionality
 
 CI/CD:
+
 - GitHub Actions workflow with 3 jobs
 - Python linting with flake8
 - JavaScript linting with ESLint
 - Automated build and test steps
 
 Deployment:
+
 - Proper URL format: theiadockernext-<integer>-8000
 - IBM Skills Network / Cognitive Class platform
 - Production environment functional
