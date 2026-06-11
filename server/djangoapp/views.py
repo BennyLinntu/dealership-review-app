@@ -180,7 +180,8 @@ class DjangoLoginView(views.APIView):
 
     def post(self, request):
         # Accept either 'userName' or 'username'
-        username = request.data.get('userName', request.data.get('username', ''))
+        username = request.data.get(
+            'userName', request.data.get('username', ''))
         password = request.data.get('password', '')
         user = authenticate(username=username, password=password)
         if user is not None:
