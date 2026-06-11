@@ -1,0 +1,183 @@
+================== Get Car Makes and Models API Test ==================
+
+Command:
+curl -X GET http://localhost:5000/api/cars/ \
+  -H "Content-Type: application/json"
+
+Response:
+{
+    "count": 5,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 1,
+            "name": "Toyota",
+            "description": "Toyota vehicles",
+            "models": [
+                {"id": 1, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Camry", "year": 2020},
+                {"id": 2, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Camry", "year": 2021},
+                {"id": 3, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Camry", "year": 2022},
+                {"id": 4, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Camry", "year": 2023},
+                {"id": 5, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Camry", "year": 2024},
+                {"id": 6, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Corolla", "year": 2020},
+                {"id": 7, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Corolla", "year": 2021},
+                {"id": 8, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Corolla", "year": 2022},
+                {"id": 9, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Corolla", "year": 2023},
+                {"id": 10, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Corolla", "year": 2024},
+                {"id": 11, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Prius", "year": 2020},
+                {"id": 12, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Prius", "year": 2021},
+                {"id": 13, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Prius", "year": 2022},
+                {"id": 14, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Prius", "year": 2023},
+                {"id": 15, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Prius", "year": 2024},
+                {"id": 16, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Highlander", "year": 2020},
+                {"id": 17, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Highlander", "year": 2021},
+                {"id": 18, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Highlander", "year": 2022},
+                {"id": 19, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Highlander", "year": 2023},
+                {"id": 20, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Highlander", "year": 2024},
+                {"id": 21, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "RAV4", "year": 2020},
+                {"id": 22, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "RAV4", "year": 2021},
+                {"id": 23, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "RAV4", "year": 2022},
+                {"id": 24, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "RAV4", "year": 2023},
+                {"id": 25, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "RAV4", "year": 2024}
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Honda",
+            "description": "Honda vehicles",
+            "models": [
+                {"id": 26, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Civic", "year": 2020},
+                {"id": 27, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Civic", "year": 2021},
+                {"id": 28, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Civic", "year": 2022},
+                {"id": 29, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Civic", "year": 2023},
+                {"id": 30, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Civic", "year": 2024},
+                {"id": 31, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Accord", "year": 2020},
+                {"id": 32, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Accord", "year": 2021},
+                {"id": 33, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Accord", "year": 2022},
+                {"id": 34, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Accord", "year": 2023},
+                {"id": 35, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Accord", "year": 2024},
+                {"id": 36, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "CR-V", "year": 2020},
+                {"id": 37, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "CR-V", "year": 2021},
+                {"id": 38, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "CR-V", "year": 2022},
+                {"id": 39, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "CR-V", "year": 2023},
+                {"id": 40, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "CR-V", "year": 2024},
+                {"id": 41, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Odyssey", "year": 2020},
+                {"id": 42, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Odyssey", "year": 2021},
+                {"id": 43, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Odyssey", "year": 2022},
+                {"id": 44, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Odyssey", "year": 2023},
+                {"id": 45, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Odyssey", "year": 2024},
+                {"id": 46, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Pilot", "year": 2020},
+                {"id": 47, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Pilot", "year": 2021},
+                {"id": 48, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Pilot", "year": 2022},
+                {"id": 49, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Pilot", "year": 2023},
+                {"id": 50, "make": {"id": 2, "name": "Honda", "description": "Honda vehicles"}, "name": "Pilot", "year": 2024}
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Ford",
+            "description": "Ford vehicles",
+            "models": [
+                {"id": 51, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "F-150", "year": 2020},
+                {"id": 52, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "F-150", "year": 2021},
+                {"id": 53, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "F-150", "year": 2022},
+                {"id": 54, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "F-150", "year": 2023},
+                {"id": 55, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "F-150", "year": 2024},
+                {"id": 56, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Mustang", "year": 2020},
+                {"id": 57, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Mustang", "year": 2021},
+                {"id": 58, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Mustang", "year": 2022},
+                {"id": 59, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Mustang", "year": 2023},
+                {"id": 60, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Mustang", "year": 2024},
+                {"id": 61, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Fusion", "year": 2020},
+                {"id": 62, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Fusion", "year": 2021},
+                {"id": 63, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Fusion", "year": 2022},
+                {"id": 64, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Fusion", "year": 2023},
+                {"id": 65, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Fusion", "year": 2024},
+                {"id": 66, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Edge", "year": 2020},
+                {"id": 67, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Edge", "year": 2021},
+                {"id": 68, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Edge", "year": 2022},
+                {"id": 69, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Edge", "year": 2023},
+                {"id": 70, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Edge", "year": 2024},
+                {"id": 71, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Explorer", "year": 2020},
+                {"id": 72, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Explorer", "year": 2021},
+                {"id": 73, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Explorer", "year": 2022},
+                {"id": 74, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Explorer", "year": 2023},
+                {"id": 75, "make": {"id": 3, "name": "Ford", "description": "Ford vehicles"}, "name": "Explorer", "year": 2024}
+            ]
+        },
+        {
+            "id": 4,
+            "name": "BMW",
+            "description": "BMW vehicles",
+            "models": [
+                {"id": 76, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "3 Series", "year": 2020},
+                {"id": 77, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "3 Series", "year": 2021},
+                {"id": 78, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "3 Series", "year": 2022},
+                {"id": 79, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "3 Series", "year": 2023},
+                {"id": 80, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "3 Series", "year": 2024},
+                {"id": 81, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "5 Series", "year": 2020},
+                {"id": 82, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "5 Series", "year": 2021},
+                {"id": 83, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "5 Series", "year": 2022},
+                {"id": 84, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "5 Series", "year": 2023},
+                {"id": 85, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "5 Series", "year": 2024},
+                {"id": 86, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "X5", "year": 2020},
+                {"id": 87, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "X5", "year": 2021},
+                {"id": 88, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "X5", "year": 2022},
+                {"id": 89, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "X5", "year": 2023},
+                {"id": 90, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "X5", "year": 2024},
+                {"id": 91, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "Z4", "year": 2020},
+                {"id": 92, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "Z4", "year": 2021},
+                {"id": 93, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "Z4", "year": 2022},
+                {"id": 94, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "Z4", "year": 2023},
+                {"id": 95, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "Z4", "year": 2024},
+                {"id": 96, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "M440i", "year": 2020},
+                {"id": 97, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "M440i", "year": 2021},
+                {"id": 98, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "M440i", "year": 2022},
+                {"id": 99, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "M440i", "year": 2023},
+                {"id": 100, "make": {"id": 4, "name": "BMW", "description": "BMW vehicles"}, "name": "M440i", "year": 2024}
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Chevrolet",
+            "description": "Chevrolet vehicles",
+            "models": [
+                {"id": 101, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Silverado", "year": 2020},
+                {"id": 102, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Silverado", "year": 2021},
+                {"id": 103, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Silverado", "year": 2022},
+                {"id": 104, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Silverado", "year": 2023},
+                {"id": 105, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Silverado", "year": 2024},
+                {"id": 106, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Camaro", "year": 2020},
+                {"id": 107, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Camaro", "year": 2021},
+                {"id": 108, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Camaro", "year": 2022},
+                {"id": 109, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Camaro", "year": 2023},
+                {"id": 110, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Camaro", "year": 2024},
+                {"id": 111, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Malibu", "year": 2020},
+                {"id": 112, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Malibu", "year": 2021},
+                {"id": 113, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Malibu", "year": 2022},
+                {"id": 114, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Malibu", "year": 2023},
+                {"id": 115, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Malibu", "year": 2024},
+                {"id": 116, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Equinox", "year": 2020},
+                {"id": 117, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Equinox", "year": 2021},
+                {"id": 118, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Equinox", "year": 2022},
+                {"id": 119, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Equinox", "year": 2023},
+                {"id": 120, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Equinox", "year": 2024},
+                {"id": 121, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Tahoe", "year": 2020},
+                {"id": 122, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Tahoe", "year": 2021},
+                {"id": 123, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Tahoe", "year": 2022},
+                {"id": 124, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Tahoe", "year": 2023},
+                {"id": 125, "make": {"id": 5, "name": "Chevrolet", "description": "Chevrolet vehicles"}, "name": "Tahoe", "year": 2024}
+            ]
+        }
+    ]
+}
+
+HTTP Status: 200 OK
+Execution Time: 187ms
+Total Car Makes: 5 (Toyota, Honda, Ford, BMW, Chevrolet)
+Total Car Models: 125 (5 makes x 5 models x 5 years: 2020-2024)
+
+Also retrievable via separate endpoints:
+- Car Makes only:  curl -X GET http://localhost:5000/api/cars/makes/
+- Car Models only: curl -X GET http://localhost:5000/api/cars/models/
