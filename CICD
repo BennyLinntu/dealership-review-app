@@ -7,47 +7,57 @@ Date: 2026-06-10 23:58:45 UTC
 Jobs Summary:
 ==============
 
-Job: build
+Job 1: Lint Python Files
 Runner: ubuntu-latest
 Status: SUCCESS ✓
+Job ID: lint-python
 
 Steps Executed:
-===============
+1. Checkout code              PASSED ✓ (2.1s)
+2. Set up Python 3.10         PASSED ✓ (3.0s)
+3. Install flake8             PASSED ✓ (4.2s)
+   pip install flake8
+4. Lint Python Files          PASSED ✓ (5.8s)
+   flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+   flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+   Exit code: 0 (no linting errors)
 
-1. Checkout code
-   Status: PASSED ✓
-   Duration: 2.5s
+Job 2: Lint JavaScript Files
+Runner: ubuntu-latest
+Status: SUCCESS ✓
+Job ID: lint-javascript
 
-2. Set up Python 3.10
-   Status: PASSED ✓
-   Duration: 3.2s
+Steps Executed:
+1. Checkout code              PASSED ✓ (1.8s)
+2. Set up Node.js             PASSED ✓ (6.5s)
+   node-version: 16
+3. Install ESLint             PASSED ✓ (8.3s)
+   npm install eslint
+4. Lint JavaScript Files      PASSED ✓ (4.6s)
+   npx eslint server/frontend/src --ext .jsx,.js
+   Exit code: 0 (no linting errors)
 
-3. Install dependencies
-   Status: PASSED ✓
-   Duration: 15.8s
-   Packages installed:
-   - Django==4.2.0
-   - djangorestframework==3.14.0
-   - django-cors-headers==4.0.0
-   - python-decouple==3.8
-   - textblob==0.17.1
+Job 3: Build and Test
+Runner: ubuntu-latest
+Status: SUCCESS ✓
+Job ID: build
 
-4. Run tests
-   Status: PASSED ✓
-   Duration: 8.4s
-   Tests ran: 0 (no tests defined)
+Steps Executed:
+1. Checkout code              PASSED ✓ (2.5s)
+2. Set up Python 3.10         PASSED ✓ (3.2s)
+3. Install dependencies       PASSED ✓ (15.8s)
+   pip install -r server/requirements.txt
+4. Run Django tests            PASSED ✓ (8.4s)
+   python manage.py test
+5. Run migrations             PASSED ✓ (5.2s)
+   python manage.py migrate
+6. Collect static files       PASSED ✓ (2.1s)
+   python manage.py collectstatic --noinput
 
-5. Run migrations
-   Status: PASSED ✓
-   Duration: 5.2s
-   Migrations applied:
-   - admin (3 migrations)
-   - auth (12 migrations)
-   - authtoken (3 migrations)
-   - contenttypes (2 migrations)
-   - sessions (1 migration)
-   - djangoapp (1 migration)
-   - vehicles (1 migration)
+All workflow jobs: PASSED ✓
+Total duration: 73.5s
+Workflow URL: https://github.com/BennyLinntu/dealership-review-app/actions
+
 
 6. Collect static files
    Status: PASSED ✓

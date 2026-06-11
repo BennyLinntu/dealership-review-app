@@ -1,8 +1,12 @@
 # Dealership Review Application
 
+## Repository Name
+
+**dealership-review-app** — GitHub Repository: [BennyLinntu/dealership-review-app](https://github.com/BennyLinntu/dealership-review-app)
+
 ## Project Name
 
-**Dealership Review System** - A full-stack Django and React application for managing dealership information, customer reviews, and sentiment analysis.
+**Dealership Review System** — A full-stack Django and React application for managing dealership information, customer reviews, and sentiment analysis.
 
 ## Overview
 

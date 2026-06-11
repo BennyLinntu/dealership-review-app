@@ -218,7 +218,7 @@ GitHub 仓库:
   About: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html
   Contact: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html
   Register: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx
-  
+
 本地 API URLs (localhost:5000):
   GET  /api/dealers/              - 所有经销商
   GET  /api/dealers/1/            - 单个经销商
@@ -494,6 +494,6 @@ Git 操作:
 3. 完成最终提交
 
 ═══════════════════════════════════════════════════════════════════════════════
-                        项目已准备好部署! 
+                        项目已准备好部署!
                    The project is ready for deployment!
 ═══════════════════════════════════════════════════════════════════════════════

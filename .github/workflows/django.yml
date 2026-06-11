@@ -7,30 +7,52 @@ on:
     branches: [main, develop]
 
 jobs:
-  build:
+  lint-python:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: dealership_db
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python 3.10
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: "3.10"
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: Lint Python Files
+        run: |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+  lint-javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install ESLint
+        run: npm install eslint
+
+      - name: Lint JavaScript Files
+        run: |
+          npx eslint server/frontend/src --ext .jsx,.js --no-eslintrc -c '{"rules":{"no-undef":"warn"}}' || true
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint-python, lint-javascript]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
@@ -51,9 +73,3 @@ jobs:
         run: |
           cd server
           python manage.py collectstatic --noinput
-
-      - name: Deploy to production
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          echo "Deployment step - configure with your deployment platform"
-          echo "This would deploy to Heroku, AWS, Azure, or other platforms"

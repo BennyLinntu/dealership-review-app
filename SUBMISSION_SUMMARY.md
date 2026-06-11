@@ -1,10 +1,11 @@
 # 完整任务提交文档 (Complete Tasks Submission)
 
 ## 项目信息 (Project Information)
+
 - **项目名称**: Dealership Review Application
-- **GitHub 仓库**: https://github.com/BennyLinntu/dealership-review-app
-- **部署URL**: https://dealership-review-app.herokuapp.com
-- **本地地址**: http://localhost:5000
+- **GitHub 仓库**: <https://github.com/BennyLinntu/dealership-review-app>
+- **部署URL**: <https://dealership-review-app.herokuapp.com>
+- **本地地址**: <http://localhost:5000>
 - **提交日期**: 2026-06-10
 
 ---
@@ -12,42 +13,52 @@
 ## ✅ 任务完成清单 (Tasks 1-27)
 
 ### Task 1: README.md ✅
-**GitHub URL**: https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md
+
+**GitHub URL**: <https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md>
 **文件位置**: `/README.md`
 **内容**: 项目概述、技术栈、功能列表、API文档、部署说明
 
 ### Task 2: Django Server Running ✅
+
 **文件**: `django_server`
 **状态**: ✅ 服务器运行在 localhost:5000
 **测试命令**: `python manage.py runserver 0.0.0.0:5000`
 
 ### Task 3: About Us Page ✅
-**GitHub URL**: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html
+
+**GitHub URL**: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html>
 **文件位置**: `/server/frontend/static/About.html`
-**内容**: 
+**内容**:
+
 - 5 个团队成员卡片
 - 团队成员: John Thompson (CEO), Sarah Johnson (CTO), Michael Chen (PM), Emily Rodriguez (Marketing), David Wilson (Support)
 - 响应式设计, 梯度背景
 
 ### Task 4: Contact Us Page ✅
-**GitHub URL**: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html
+
+**GitHub URL**: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html>
 **文件位置**: `/server/frontend/static/Contact.html`
 **内容**:
+
 - 完整的联系信息表单
 - 字段: Name, Email, Phone, Subject, Message
 - 业务地址、电话、营业时间
 - 社交媒体链接
 
 ### Task 5: Login cURL Command ✅
+
 **文件**: `loginuser`
 **API 端点**: POST `/api/login/`
 **请求示例**:
+
 ```bash
 curl -X POST http://localhost:5000/api/login/ \
   -H "Content-Type: application/json" \
   -d '{"username":"admin","password":"admin123"}'
 ```
+
 **响应示例**:
+
 ```json
 {
     "token": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
@@ -59,14 +70,18 @@ curl -X POST http://localhost:5000/api/login/ \
 ```
 
 ### Task 6: Logout cURL Command ✅
+
 **文件**: `logoutuser`
 **API 端点**: POST `/api/logout/`
 **请求示例**:
+
 ```bash
 curl -X POST http://localhost:5000/api/logout/ \
   -H "Authorization: Token YOUR_TOKEN_HERE"
 ```
+
 **响应示例**:
+
 ```json
 {
     "message": "Logout successful"
@@ -74,9 +89,11 @@ curl -X POST http://localhost:5000/api/logout/ \
 ```
 
 ### Task 7: Register Component ✅
-**GitHub URL**: https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx
+
+**GitHub URL**: <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx>
 **文件位置**: `/server/frontend/src/components/Register/Register.jsx`
 **输入字段** (5个必填字段):
+
 1. Username
 2. First Name
 3. Last Name
@@ -84,22 +101,29 @@ curl -X POST http://localhost:5000/api/logout/ \
 5. Password
 
 ### Task 8: Get Reviews cURL Command ✅
+
 **文件**: `getdatalibraries` (第一部分)
 **API 端点**: GET `/api/reviews/2/`
 **请求示例**:
+
 ```bash
 curl http://localhost:5000/api/reviews/2/
 ```
+
 **响应**: 获取经销商ID 2的所有评论
 
 ### Task 9: Get All Dealers cURL Command ✅
+
 **文件**: `getdatalibraries` (第二部分)
 **API 端点**: GET `/api/dealers/`
 **请求示例**:
+
 ```bash
 curl http://localhost:5000/api/dealers/
 ```
+
 **响应**: 返回5个经销商:
+
 - Downtown Toyota (New York, NY) - ID 1
 - Kansas City Honda (Kansas City, KS) - ID 2
 - Sunshine Ford (Miami, FL) - ID 3
@@ -107,13 +131,17 @@ curl http://localhost:5000/api/dealers/
 - Texas Motors (Houston, TX) - ID 5
 
 ### Task 10: Get Dealer by ID cURL Command ✅
+
 **文件**: `getdatalibrary`
 **API 端点**: GET `/api/dealers/2/`
 **请求示例**:
+
 ```bash
 curl http://localhost:5000/api/dealers/2/
 ```
+
 **响应**: Kansas City Honda 的完整信息
+
 ```json
 {
     "id": 2,
@@ -132,29 +160,36 @@ curl http://localhost:5000/api/dealers/2/
 ```
 
 ### Task 11: Get Dealers by State cURL Command ✅
+
 **文件**: `getdatalibraryState`
 **API 端点**: GET `/api/dealers/state/KS/`
 **请求示例**:
+
 ```bash
 curl http://localhost:5000/api/dealers/state/KS/
 ```
+
 **响应**: Kansas 州的1个经销商 (Kansas City Honda)
 
 ### Task 12: Admin Login Screenshot ✅
+
 **截图**: admin_login.png
-**地址**: http://localhost:5000/admin/
+**地址**: <http://localhost:5000/admin/>
 **凭证**: username: admin, password: admin123
 **内容**: Django 管理员仪表板, 显示所有数据模型
 
 ### Task 13: Admin Logout Screenshot ✅
+
 **截图**: admin_logout.png
 **内容**: 登出成功页面, 显示 "Logged out" 消息
 
 ### Task 14-15: Cars/Makes/Models cURL Command ✅
+
 **文件**: `getdatalibraries` (第三部分)
 **API 端点**: GET `/api/cars/`
 **响应**: 5个汽车制造商，每个125个车型 (5年 x 5个型号 x 5个制造商)
 **制造商**:
+
 1. Toyota (5 models)
 2. Honda (5 models)
 3. Ford (5 models)
@@ -162,15 +197,19 @@ curl http://localhost:5000/api/dealers/state/KS/
 5. Chevrolet (5 models)
 
 ### Task 16: Sentiment Analysis cURL Command ✅
+
 **文件**: `analyzeReview`
 **API 端点**: POST `/api/sentiment/`
 **请求示例**:
+
 ```bash
 curl -X POST http://localhost:5000/api/sentiment/ \
   -H "Content-Type: application/json" \
   -d '{"text":"Fantastic services"}'
 ```
+
 **响应**:
+
 ```json
 {
     "text": "Fantastic services",
@@ -181,40 +220,49 @@ curl -X POST http://localhost:5000/api/sentiment/ \
 ```
 
 ### Task 17: Home Page Before Login Screenshot ✅
+
 **截图**: get_delivers.png
-**地址**: http://localhost:5000/
-**内容**: 
+**地址**: <http://localhost:5000/>
+**内容**:
+
 - 5个经销商卡片网格
 - Sign In / Sign Up 按钮可见
 - 搜索功能
 - 响应式设计
 
 ### Task 18: Home Page After Login Screenshot ✅
+
 **截图**: get_delivers_loggedin.jpeg
 **内容**: 登录后的主页 (已在浏览器中设置 token)
 
 ### Task 19: Dealers Filtered by State Screenshot ✅
+
 **截图**: dealersbystate.png
-**地址**: http://localhost:5000/api/dealers/state/KS/
+**地址**: <http://localhost:5000/api/dealers/state/KS/>
 **内容**: Kansas 州的经销商筛选结果 (Kansas City Honda)
 
 ### Task 20: Dealer Details with Reviews Screenshot ✅
+
 **截图**: dealer_id_reviews.png
-**地址**: http://localhost:5000/api/dealers/1/
+**地址**: <http://localhost:5000/api/dealers/1/>
 **内容**: Downtown Toyota 的详细信息，包括所有字段和评论列表
 
 ### Task 21: Review Submission Form Screenshot ✅
+
 **截图**: dealershi_review_submission.png
 **内容**:
+
 - 经销商选择: Kansas City Honda
 - 评分: 5星
 - 评论文本: "Excellent service! The staff was very helpful and professional. Great experience!"
 - 表单填写完成，未提交
 
 ### Task 22: Posted Review Screenshot ✅
+
 **截图**: added_review.png
 **API 响应**: HTTP 201 Created
 **评论数据**:
+
 ```json
 {
     "id": 1,
@@ -230,9 +278,11 @@ curl -X POST http://localhost:5000/api/sentiment/ \
 ```
 
 ### Task 23: GitHub Actions CI/CD Workflow ✅
+
 **文件**: `CICD`
 **工作流文件**: `.github/workflows/django.yml`
-**内容**: 
+**内容**:
+
 - Checkout code
 - Setup Python 3.10
 - Install dependencies
@@ -242,10 +292,12 @@ curl -X POST http://localhost:5000/api/sentiment/ \
 - Deploy to production
 
 ### Task 24: Deployment URL ✅
+
 **文件**: `deploymentURL`
-**URL**: https://dealership-review-app.herokuapp.com
+**URL**: <https://dealership-review-app.herokuapp.com>
 **平台**: Heroku
 **部署命令**:
+
 ```bash
 heroku login
 heroku create dealership-review-app
@@ -253,14 +305,17 @@ git push heroku main
 ```
 
 ### Task 25: Deployed Landing Page Screenshot ⏳
+
 **截图**: deployed_landingpage.png
 **状态**: 准备就绪 (需要部署到 Heroku)
 
 ### Task 26: Deployed Logged-in Page Screenshot ⏳
+
 **截图**: deployed_loggedin.jpeg
 **状态**: 准备就绪 (需要部署到 Heroku)
 
 ### Task 27: Deployed Dealer Detail Screenshot ⏳
+
 **截图**: deployed_dealer_detail.png
 **状态**: 准备就绪 (需要部署到 Heroku)
 
@@ -284,11 +339,11 @@ git push heroku main
 
 | 文件 | GitHub链接 |
 |------|-----------|
-| README | https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md |
-| About.html | https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html |
-| Contact.html | https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html |
-| Register.jsx | https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx |
-| 仓库 | https://github.com/BennyLinntu/dealership-review-app |
+| README | <https://github.com/BennyLinntu/dealership-review-app/blob/main/README.md> |
+| About.html | <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/About.html> |
+| Contact.html | <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/static/Contact.html> |
+| Register.jsx | <https://github.com/BennyLinntu/dealership-review-app/blob/main/server/frontend/src/components/Register/Register.jsx> |
+| 仓库 | <https://github.com/BennyLinntu/dealership-review-app> |
 
 ---
 

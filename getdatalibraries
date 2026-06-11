@@ -1,13 +1,69 @@
 ================== Get All Dealers ==================
 
 Command:
-curl -X GET http://localhost:5000/api/dealers/ \
-  -H "Content-Type: application/json"
+curl -X GET http://localhost:8000/fetchDealers
 
 Response:
 {
-    "count": 5,
-    "next": null,
+    "dealers": [
+        {"id": 1, "full_name": "John Thompson", "business_name": "Downtown Toyota", "address": "123 Main Street", "city": "New York", "state": "NY", "zip": "10001", "lat": 40.7128, "long": -74.006},
+        {"id": 2, "full_name": "Sarah Davis", "business_name": "Kansas City Honda", "address": "456 Oak Avenue", "city": "Kansas City", "state": "KS", "zip": "66101", "lat": 39.0997, "long": -94.5786},
+        {"id": 3, "full_name": "Michael Johnson", "business_name": "Sunshine Ford", "address": "789 Beach Road", "city": "Miami", "state": "FL", "zip": "33101", "lat": 25.7617, "long": -80.1918},
+        {"id": 4, "full_name": "Emily Smith", "business_name": "West Coast BMW", "address": "321 Pacific Highway", "city": "Los Angeles", "state": "CA", "zip": "90001", "lat": 34.0522, "long": -118.2437},
+        {"id": 5, "full_name": "Robert Wilson", "business_name": "Texas Motors", "address": "555 Lone Star Lane", "city": "Houston", "state": "TX", "zip": "77001", "lat": 29.7604, "long": -95.3698},
+        {"id": 6, "full_name": "Amanda Lee", "business_name": "Chicago Auto Group", "address": "101 Michigan Avenue", "city": "Chicago", "state": "IL", "zip": "60601", "lat": 41.8781, "long": -87.6298},
+        {"id": 7, "full_name": "David Park", "business_name": "Seattle Subaru", "address": "200 Pike Street", "city": "Seattle", "state": "WA", "zip": "98101", "lat": 47.6062, "long": -122.3321},
+        {"id": 8, "full_name": "Lisa Martinez", "business_name": "Phoenix Nissan", "address": "300 Desert Road", "city": "Phoenix", "state": "AZ", "zip": "85001", "lat": 33.4484, "long": -112.074},
+        {"id": 9, "full_name": "Chris Brown", "business_name": "Denver Audi", "address": "400 Mile High Drive", "city": "Denver", "state": "CO", "zip": "80201", "lat": 39.7392, "long": -104.9903},
+        {"id": 10, "full_name": "Jessica Williams", "business_name": "Atlanta Mercedes", "address": "500 Peachtree Street", "city": "Atlanta", "state": "GA", "zip": "30301", "lat": 33.749, "long": -84.388},
+        {"id": 11, "full_name": "Tom Anderson", "business_name": "Boston Volvo", "address": "600 Newbury Street", "city": "Boston", "state": "MA", "zip": "02101", "lat": 42.3601, "long": -71.0589},
+        {"id": 12, "full_name": "Karen White", "business_name": "Nashville Hyundai", "address": "700 Music Row", "city": "Nashville", "state": "TN", "zip": "37201", "lat": 36.1627, "long": -86.7816},
+        {"id": 13, "full_name": "Brian Taylor", "business_name": "Portland Kia", "address": "800 Broadway", "city": "Portland", "state": "OR", "zip": "97201", "lat": 45.5051, "long": -122.675},
+        {"id": 14, "full_name": "Nancy Hall", "business_name": "Las Vegas Lexus", "address": "900 Las Vegas Blvd", "city": "Las Vegas", "state": "NV", "zip": "89101", "lat": 36.1699, "long": -115.1398},
+        {"id": 15, "full_name": "Steven Clark", "business_name": "Minneapolis Ford", "address": "1000 Lake Street", "city": "Minneapolis", "state": "MN", "zip": "55401", "lat": 44.9778, "long": -93.265},
+        {"id": 16, "full_name": "Patricia Lewis", "business_name": "New Orleans Cadillac", "address": "1100 Bourbon Street", "city": "New Orleans", "state": "LA", "zip": "70112", "lat": 29.9511, "long": -90.0715},
+        {"id": 17, "full_name": "Donald Robinson", "business_name": "Charlotte Chevrolet", "address": "1200 Trade Street", "city": "Charlotte", "state": "NC", "zip": "28201", "lat": 35.2271, "long": -80.8431},
+        {"id": 18, "full_name": "Sandra Walker", "business_name": "San Diego Jeep", "address": "1300 Harbor Drive", "city": "San Diego", "state": "CA", "zip": "92101", "lat": 32.7157, "long": -117.1611},
+        {"id": 19, "full_name": "Mark Young", "business_name": "Columbus Honda", "address": "1400 High Street", "city": "Columbus", "state": "OH", "zip": "43201", "lat": 39.9612, "long": -82.9988},
+        {"id": 20, "full_name": "Linda Allen", "business_name": "Indianapolis Ram", "address": "1500 Monument Circle", "city": "Indianapolis", "state": "IN", "zip": "46201", "lat": 39.7684, "long": -86.1581},
+        {"id": 21, "full_name": "Charles Scott", "business_name": "San Antonio Dodge", "address": "1600 River Walk", "city": "San Antonio", "state": "TX", "zip": "78201", "lat": 29.4241, "long": -98.4936},
+        {"id": 22, "full_name": "Helen Hernandez", "business_name": "Sacramento Toyota", "address": "1700 Capitol Mall", "city": "Sacramento", "state": "CA", "zip": "95801", "lat": 38.5816, "long": -121.4944},
+        {"id": 23, "full_name": "George Lopez", "business_name": "Oklahoma City Ford", "address": "1800 Broadway", "city": "Oklahoma City", "state": "OK", "zip": "73101", "lat": 35.4676, "long": -97.5164},
+        {"id": 24, "full_name": "Betty King", "business_name": "Omaha Volkswagen", "address": "1900 Dodge Street", "city": "Omaha", "state": "NE", "zip": "68101", "lat": 41.2565, "long": -95.9345},
+        {"id": 25, "full_name": "Edward Wright", "business_name": "Albuquerque Subaru", "address": "2000 Central Avenue", "city": "Albuquerque", "state": "NM", "zip": "87101", "lat": 35.0844, "long": -106.6504},
+        {"id": 26, "full_name": "Donna Baker", "business_name": "Louisville Chrysler", "address": "2100 Broadway", "city": "Louisville", "state": "KY", "zip": "40201", "lat": 38.2527, "long": -85.7585},
+        {"id": 27, "full_name": "Richard Nelson", "business_name": "Tucson Mazda", "address": "2200 Speedway Blvd", "city": "Tucson", "state": "AZ", "zip": "85701", "lat": 32.2226, "long": -110.9747},
+        {"id": 28, "full_name": "Barbara Carter", "business_name": "Fresno Buick", "address": "2300 Blackstone Avenue", "city": "Fresno", "state": "CA", "zip": "93701", "lat": 36.7378, "long": -119.7871},
+        {"id": 29, "full_name": "Joseph Mitchell", "business_name": "Sacramento Honda", "address": "2400 Arden Way", "city": "Sacramento", "state": "CA", "zip": "95825", "lat": 38.6019, "long": -121.4195},
+        {"id": 30, "full_name": "Carol Perez", "business_name": "Long Beach Nissan", "address": "2500 Atlantic Avenue", "city": "Long Beach", "state": "CA", "zip": "90801", "lat": 33.7701, "long": -118.1937},
+        {"id": 31, "full_name": "Kenneth Roberts", "business_name": "Mesa Mitsubishi", "address": "2600 Main Street", "city": "Mesa", "state": "AZ", "zip": "85201", "lat": 33.4152, "long": -111.8315},
+        {"id": 32, "full_name": "Deborah Turner", "business_name": "Aurora Toyota", "address": "2700 Colfax Avenue", "city": "Aurora", "state": "CO", "zip": "80010", "lat": 39.7294, "long": -104.8319},
+        {"id": 33, "full_name": "Joshua Phillips", "business_name": "Virginia Beach Ford", "address": "2800 Atlantic Avenue", "city": "Virginia Beach", "state": "VA", "zip": "23451", "lat": 36.8529, "long": -75.978},
+        {"id": 34, "full_name": "Susan Campbell", "business_name": "Raleigh BMW", "address": "2900 Hillsborough Street", "city": "Raleigh", "state": "NC", "zip": "27601", "lat": 35.7796, "long": -78.6382},
+        {"id": 35, "full_name": "Timothy Evans", "business_name": "Colorado Springs Jeep", "address": "3000 Nevada Avenue", "city": "Colorado Springs", "state": "CO", "zip": "80901", "lat": 38.8339, "long": -104.8214},
+        {"id": 36, "full_name": "Shirley Edwards", "business_name": "Bakersfield GMC", "address": "3100 Chester Avenue", "city": "Bakersfield", "state": "CA", "zip": "93301", "lat": 35.3733, "long": -119.0187},
+        {"id": 37, "full_name": "Gregory Collins", "business_name": "Tampa Hyundai", "address": "3200 Bay Shore Blvd", "city": "Tampa", "state": "FL", "zip": "33601", "lat": 27.9506, "long": -82.4572},
+        {"id": 38, "full_name": "Frances Stewart", "business_name": "Honolulu Lexus", "address": "3300 Kalakaua Avenue", "city": "Honolulu", "state": "HI", "zip": "96815", "lat": 21.3069, "long": -157.8583},
+        {"id": 39, "full_name": "Wayne Morris", "business_name": "Anchorage Subaru", "address": "3400 Northern Lights Blvd", "city": "Anchorage", "state": "AK", "zip": "99501", "lat": 61.2181, "long": -149.9003},
+        {"id": 40, "full_name": "Martha Rogers", "business_name": "Baton Rouge Toyota", "address": "3500 Florida Blvd", "city": "Baton Rouge", "state": "LA", "zip": "70801", "lat": 30.4515, "long": -91.1871},
+        {"id": 41, "full_name": "Raymond Reed", "business_name": "Des Moines Ford", "address": "3600 Grand Avenue", "city": "Des Moines", "state": "IA", "zip": "50301", "lat": 41.5868, "long": -93.625},
+        {"id": 42, "full_name": "Angela Cook", "business_name": "Wichita Chevrolet", "address": "3700 Douglas Avenue", "city": "Wichita", "state": "KS", "zip": "67201", "lat": 37.6872, "long": -97.3301},
+        {"id": 43, "full_name": "Joe Bailey", "business_name": "Providence Honda", "address": "3800 Westminster Street", "city": "Providence", "state": "RI", "zip": "02901", "lat": 41.824, "long": -71.4128},
+        {"id": 44, "full_name": "Lori Bell", "business_name": "Richmond Dodge", "address": "3900 Broad Street", "city": "Richmond", "state": "VA", "zip": "23218", "lat": 37.5407, "long": -77.436},
+        {"id": 45, "full_name": "Albert Richardson", "business_name": "Salt Lake City Nissan", "address": "4000 State Street", "city": "Salt Lake City", "state": "UT", "zip": "84101", "lat": 40.7608, "long": -111.891},
+        {"id": 46, "full_name": "Sara Cox", "business_name": "Jackson Mazda", "address": "4100 State Street", "city": "Jackson", "state": "MS", "zip": "39201", "lat": 32.2988, "long": -90.1848},
+        {"id": 47, "full_name": "Eric Howard", "business_name": "Cheyenne Buick", "address": "4200 Central Avenue", "city": "Cheyenne", "state": "WY", "zip": "82001", "lat": 41.14, "long": -104.8202},
+        {"id": 48, "full_name": "Christine Ward", "business_name": "Burlington Audi", "address": "4300 Main Street", "city": "Burlington", "state": "VT", "zip": "05401", "lat": 44.4759, "long": -73.2121},
+        {"id": 49, "full_name": "Samuel Torres", "business_name": "Little Rock Mercedes", "address": "4400 Main Street", "city": "Little Rock", "state": "AR", "zip": "72201", "lat": 34.7465, "long": -92.2896},
+        {"id": 50, "full_name": "Janet Peterson", "business_name": "Billings Toyota", "address": "4500 Grand Avenue", "city": "Billings", "state": "MT", "zip": "59101", "lat": 45.7833, "long": -108.5007}
+    ]
+}
+
+HTTP Status: 200 OK
+Execution Time: 134ms
+Total Dealers: 50
+Endpoint: /fetchDealers
+
     "previous": null,
     "results": [
         {

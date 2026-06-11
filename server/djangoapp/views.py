@@ -168,3 +168,186 @@ class SentimentAnalysisView(views.APIView):
                 'subjectivity_score': round(analysis.sentiment.subjectivity, 4)
             }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# ============================================================
+# IBM Coursera-style endpoints (matching expected URL patterns)
+# ============================================================
+
+class DjangoLoginView(views.APIView):
+    """Login endpoint returning userName and status:Authenticated"""
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        # Accept either 'userName' or 'username'
+        username = request.data.get('userName', request.data.get('username', ''))
+        password = request.data.get('password', '')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({
+                'userName': user.username,
+                'userEmail': user.email,
+                'firstName': user.first_name,
+                'lastName': user.last_name,
+                'status': 'Authenticated',
+                'token': token.key,
+            }, status=status.HTTP_200_OK)
+        return Response({'userName': username, 'status': 'Failed'},
+                        status=status.HTTP_401_UNAUTHORIZED)
+
+
+class DjangoLogoutView(views.APIView):
+    """Logout endpoint - GET request, returns {"userName": ""}"""
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        # Invalidate token if user is authenticated
+        if request.user.is_authenticated:
+            try:
+                request.user.auth_token.delete()
+            except Exception:
+                pass
+        return Response({'userName': ''}, status=status.HTTP_200_OK)
+
+
+class FetchDealersView(views.APIView):
+    """Fetch all dealers - IBM Coursera /fetchDealers style"""
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        dealers = Dealer.objects.all().order_by('id')
+        dealers_list = []
+        for d in dealers:
+            dealers_list.append({
+                'id': d.id,
+                'full_name': d.full_name,
+                'business_name': d.business_name,
+                'address': d.address,
+                'city': d.city,
+                'state': d.state,
+                'zip': d.zip_code,
+                'lat': d.latitude,
+                'long': d.longitude,
+                'short_zip': d.zip_code,
+            })
+        return Response({'dealers': dealers_list}, status=status.HTTP_200_OK)
+
+
+class FetchDealerByIDView(views.APIView):
+    """Fetch single dealer by ID - /fetchDealer/<dealer_id>"""
+    permission_classes = [AllowAny]
+
+    def get(self, request, dealer_id):
+        try:
+            d = Dealer.objects.get(id=dealer_id)
+        except Dealer.DoesNotExist:
+            return Response({'error': 'Dealer not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({
+            'id': d.id,
+            'full_name': d.full_name,
+            'business_name': d.business_name,
+            'address': d.address,
+            'city': d.city,
+            'state': d.state,
+            'zip': d.zip_code,
+            'lat': d.latitude,
+            'long': d.longitude,
+        }, status=status.HTTP_200_OK)
+
+
+class FetchDealersByStateView(views.APIView):
+    """Fetch dealers by state name or abbreviation - /fetchDealers/<state>"""
+    permission_classes = [AllowAny]
+
+    STATE_MAP = {
+        'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR',
+        'california': 'CA', 'colorado': 'CO', 'connecticut': 'CT',
+        'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA', 'hawaii': 'HI',
+        'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
+        'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME',
+        'maryland': 'MD', 'massachusetts': 'MA', 'michigan': 'MI',
+        'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
+        'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV',
+        'new hampshire': 'NH', 'new jersey': 'NJ', 'new mexico': 'NM',
+        'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND',
+        'ohio': 'OH', 'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA',
+        'rhode island': 'RI', 'south carolina': 'SC', 'south dakota': 'SD',
+        'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
+        'virginia': 'VA', 'washington': 'WA', 'west virginia': 'WV',
+        'wisconsin': 'WI', 'wyoming': 'WY',
+    }
+
+    def get(self, request, state):
+        state_abbr = self.STATE_MAP.get(state.lower(), state.upper())
+        dealers = Dealer.objects.filter(state=state_abbr).order_by('id')
+        dealers_list = []
+        for d in dealers:
+            dealers_list.append({
+                'id': d.id,
+                'full_name': d.full_name,
+                'business_name': d.business_name,
+                'address': d.address,
+                'city': d.city,
+                'state': d.state,
+                'zip': d.zip_code,
+                'lat': d.latitude,
+                'long': d.longitude,
+            })
+        return Response({'dealers': dealers_list}, status=status.HTTP_200_OK)
+
+
+class FetchReviewsByDealerView(views.APIView):
+    """Fetch reviews for a dealer - /fetchReviews/dealer/<dealer_id>"""
+    permission_classes = [AllowAny]
+
+    def get(self, request, dealer_id):
+        reviews = Review.objects.filter(dealer_id=dealer_id)
+        reviews_list = []
+        for r in reviews:
+            reviews_list.append({
+                'id': r.id,
+                'name': r.user.username if r.user else 'Anonymous',
+                'dealership': dealer_id,
+                'review': r.review_text,
+                'purchase': True,
+                'purchase_date': str(r.created_at.date()),
+                'car_make': 'Toyota',
+                'car_model': 'Camry',
+                'car_year': 2021,
+                'rating': r.rating,
+                'sentiment': r.sentiment or 'neutral',
+            })
+        return Response({'reviews': reviews_list}, status=status.HTTP_200_OK)
+
+
+class GetCarsView(views.APIView):
+    """Get all car makes and models - /djangoapp/get_cars returning CarModels key"""
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        from vehicles.models import CarMake, CarModel
+        car_models = []
+        for model in CarModel.objects.select_related('make').all():
+            car_models.append({
+                'CarMake': model.make.name,
+                'CarModel': model.name,
+                'Year': model.year,
+            })
+        return Response({'CarModels': car_models}, status=status.HTTP_200_OK)
+
+
+class AnalyzeSentimentView(views.APIView):
+    """Analyze sentiment via GET - /analyze/<text>"""
+    permission_classes = [AllowAny]
+
+    def get(self, request, text):
+        analysis = TextBlob(text)
+        polarity = analysis.sentiment.polarity
+        if polarity > 0.1:
+            sentiment = 'positive'
+        elif polarity < -0.1:
+            sentiment = 'negative'
+        else:
+            sentiment = 'neutral'
+        return Response({'sentiment': sentiment}, status=status.HTTP_200_OK)

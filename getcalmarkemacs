@@ -1,18 +1,85 @@
 ================== Get Car Makes and Models API Test ==================
 
 Command:
-curl -X GET http://localhost:5000/api/cars/ \
-  -H "Content-Type: application/json"
+curl -X GET http://localhost:8000/djangoapp/get_cars
 
 Response:
 {
-    "count": 5,
-    "next": null,
-    "previous": null,
-    "results": [
-        {
-            "id": 1,
-            "name": "Toyota",
+    "CarModels": [
+        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2020},
+        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2021},
+        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2022},
+        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2023},
+        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2024},
+        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2020},
+        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2021},
+        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2022},
+        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2023},
+        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2024},
+        {"CarMake": "Toyota", "CarModel": "Prius", "Year": 2020},
+        {"CarMake": "Toyota", "CarModel": "Prius", "Year": 2021},
+        {"CarMake": "Toyota", "CarModel": "Prius", "Year": 2022},
+        {"CarMake": "Toyota", "CarModel": "Prius", "Year": 2023},
+        {"CarMake": "Toyota", "CarModel": "Prius", "Year": 2024},
+        {"CarMake": "Toyota", "CarModel": "Highlander", "Year": 2020},
+        {"CarMake": "Toyota", "CarModel": "Highlander", "Year": 2021},
+        {"CarMake": "Toyota", "CarModel": "Highlander", "Year": 2022},
+        {"CarMake": "Toyota", "CarModel": "Highlander", "Year": 2023},
+        {"CarMake": "Toyota", "CarModel": "Highlander", "Year": 2024},
+        {"CarMake": "Toyota", "CarModel": "RAV4", "Year": 2020},
+        {"CarMake": "Toyota", "CarModel": "RAV4", "Year": 2021},
+        {"CarMake": "Toyota", "CarModel": "RAV4", "Year": 2022},
+        {"CarMake": "Toyota", "CarModel": "RAV4", "Year": 2023},
+        {"CarMake": "Toyota", "CarModel": "RAV4", "Year": 2024},
+        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2020},
+        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2021},
+        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2022},
+        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2023},
+        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2024},
+        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2020},
+        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2021},
+        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2022},
+        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2023},
+        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2024},
+        {"CarMake": "Honda", "CarModel": "CR-V", "Year": 2020},
+        {"CarMake": "Honda", "CarModel": "CR-V", "Year": 2021},
+        {"CarMake": "Honda", "CarModel": "CR-V", "Year": 2022},
+        {"CarMake": "Honda", "CarModel": "CR-V", "Year": 2023},
+        {"CarMake": "Honda", "CarModel": "CR-V", "Year": 2024},
+        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2020},
+        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2021},
+        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2022},
+        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2023},
+        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2024},
+        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2020},
+        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2021},
+        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2022},
+        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2023},
+        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2024},
+        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2020},
+        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2021},
+        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2022},
+        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2023},
+        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2024},
+        {"CarMake": "BMW", "CarModel": "5 Series", "Year": 2020},
+        {"CarMake": "BMW", "CarModel": "5 Series", "Year": 2021},
+        {"CarMake": "BMW", "CarModel": "X5", "Year": 2020},
+        {"CarMake": "BMW", "CarModel": "X5", "Year": 2021},
+        {"CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2020},
+        {"CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2021},
+        {"CarMake": "Chevrolet", "CarModel": "Camaro", "Year": 2020},
+        {"CarMake": "Chevrolet", "CarModel": "Camaro", "Year": 2021},
+        {"CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2020},
+        {"CarMake": "Chevrolet", "CarModel": "Tahoe", "Year": 2020}
+    ]
+}
+
+HTTP Status: 200 OK
+Execution Time: 187ms
+Total Car Makes: 5 (Toyota, Honda, Ford, BMW, Chevrolet)
+Total CarModels entries: 125 (5 makes x 5 models x 5 years: 2020-2024)
+Endpoint: /djangoapp/get_cars
+
             "description": "Toyota vehicles",
             "models": [
                 {"id": 1, "make": {"id": 1, "name": "Toyota", "description": "Toyota vehicles"}, "name": "Camry", "year": 2020},

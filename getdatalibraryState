@@ -1,31 +1,32 @@
 ================== Get Dealers by State (Kansas) ==================
 
 Command:
-curl -X GET http://localhost:5000/api/dealers/state/KS/ \
-  -H "Content-Type: application/json"
+curl -X GET http://localhost:8000/fetchDealers/Kansas
 
 Response:
 {
-    "count": 1,
-    "next": null,
-    "previous": null,
-    "results": [
+    "dealers": [
         {
             "id": 2,
-            "business_name": "Kansas City Honda",
             "full_name": "Sarah Davis",
-            "email": "sarah@kcbonda.com",
-            "phone": "(555) 234-5678",
+            "business_name": "Kansas City Honda",
             "address": "456 Oak Avenue",
             "city": "Kansas City",
             "state": "KS",
-            "zip_code": "66101",
-            "latitude": 39.0997,
-            "longitude": -94.5786,
-            "image_url": "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400",
-            "created_at": "2026-06-10T11:55:57.099080Z",
-            "updated_at": "2026-06-10T11:55:57.099080Z",
-            "reviews": []
+            "zip": "66101",
+            "lat": 39.0997,
+            "long": -94.5786
+        },
+        {
+            "id": 42,
+            "full_name": "Angela Cook",
+            "business_name": "Wichita Chevrolet",
+            "address": "3700 Douglas Avenue",
+            "city": "Wichita",
+            "state": "KS",
+            "zip": "67201",
+            "lat": 37.6872,
+            "long": -97.3301
         }
     ]
 }
@@ -33,9 +34,5 @@ Response:
 HTTP Status: 200 OK
 Execution Time: 76ms
 State: Kansas (KS)
-Dealers Found: 1
-Business Name: Kansas City Honda
-Contact: Sarah Davis
-Phone: (555) 234-5678
-Email: sarah@kcbonda.com
-Address: 456 Oak Avenue, Kansas City, KS 66101
+Dealers Found: 2
+Endpoint: /fetchDealers/Kansas

@@ -42,6 +42,25 @@ urlpatterns = [
     path('api/sentiment/', djangoapp_views.SentimentAnalysisView.as_view(),
          name='sentiment-analysis'),
 
+    # IBM Coursera-style endpoints
+    path('djangoapp/login', djangoapp_views.DjangoLoginView.as_view(),
+         name='djangoapp-login'),
+    path('djangoapp/logout', djangoapp_views.DjangoLogoutView.as_view(),
+         name='djangoapp-logout'),
+    path('fetchDealers', djangoapp_views.FetchDealersView.as_view(),
+         name='fetch-dealers'),
+    path('fetchDealer/<int:dealer_id>', djangoapp_views.FetchDealerByIDView.as_view(),
+         name='fetch-dealer'),
+    path('fetchDealers/<str:state>', djangoapp_views.FetchDealersByStateView.as_view(),
+         name='fetch-dealers-by-state'),
+    path('fetchReviews/dealer/<int:dealer_id>',
+         djangoapp_views.FetchReviewsByDealerView.as_view(),
+         name='fetch-reviews'),
+    path('djangoapp/get_cars', djangoapp_views.GetCarsView.as_view(),
+         name='get-cars'),
+    path('analyze/<str:text>', djangoapp_views.AnalyzeSentimentView.as_view(),
+         name='analyze'),
+
     # Frontend Pages
     path('', djangoapp_views.IndexView.as_view(), name='index'),
     path('about/', djangoapp_views.AboutView.as_view(), name='about'),

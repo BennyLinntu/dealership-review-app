@@ -1,6 +1,7 @@
-<https://dealership-review-app.herokuapp.com>
+https://bennylinntu-8000.proxy.cognitiveclass.ai
 
 Note: This is the deployment URL for the Dealership Review Application.
-The application is deployed on Heroku and accessible at the above URL.
+The application is deployed on IBM Skills Network / Cognitive Class platform.
+Format: https://<username>-8000.proxy.cognitiveclass.ai
 
-For local development, use: <http://localhost:5000/>
+For local development, use: http://localhost:8000/
