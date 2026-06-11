@@ -1,65 +1,10 @@
-================== Get All Dealers API Test ==================
-
-Command:
 curl -X GET http://localhost:8000/fetchDealers
-
-Response:
 {
     "dealers": [
-        {"id": 1, "full_name": "Abele Motors", "business_name": "Abele Motors", "address": "200 W Station Ave", "city": "Lombard", "state": "IL", "zip": "60148", "lat": 41.8835, "long": -88.0074},
-        {"id": 2, "full_name": "Kansas City Honda", "business_name": "Kansas City Honda", "address": "4607 Main St", "city": "Kansas City", "state": "KS", "zip": "66101", "lat": 39.0997, "long": -94.5786},
-        {"id": 3, "full_name": "Michigan Motors", "business_name": "Michigan Motors", "address": "500 S Telegraph Rd", "city": "Pontiac", "state": "MI", "zip": "48341", "lat": 42.6320, "long": -83.2844},
-        {"id": 4, "full_name": "Texas Auto Group", "business_name": "Texas Auto Group", "address": "1500 Main St", "city": "Houston", "state": "TX", "zip": "77002", "lat": 29.7589, "long": -95.3677},
-        {"id": 5, "full_name": "Florida Motors", "business_name": "Florida Motors", "address": "2000 Collins Ave", "city": "Miami Beach", "state": "FL", "zip": "33139", "lat": 25.7814, "long": -80.1330},
-        {"id": 6, "full_name": "California Motors", "business_name": "California Motors", "address": "350 Fifth Ave", "city": "San Francisco", "state": "CA", "zip": "94107", "lat": 37.7749, "long": -122.4194},
-        {"id": 7, "full_name": "New York Motors", "business_name": "New York Motors", "address": "350 Fifth Ave", "city": "New York", "state": "NY", "zip": "10118", "lat": 40.7484, "long": -73.9857},
-        {"id": 8, "full_name": "Georgia Motors", "business_name": "Georgia Motors", "address": "1 Turner Field Drive", "city": "Atlanta", "state": "GA", "zip": "30315", "lat": 33.7490, "long": -84.3880},
-        {"id": 9, "full_name": "Ohio Motors", "business_name": "Ohio Motors", "address": "123 Main St", "city": "Columbus", "state": "OH", "zip": "43215", "lat": 39.9612, "long": -82.9988},
-        {"id": 10, "full_name": "Pennsylvania Motors", "business_name": "Pennsylvania Motors", "address": "200 Market St", "city": "Philadelphia", "state": "PA", "zip": "19103", "lat": 39.9526, "long": -75.1652},
-        {"id": 11, "full_name": "North Carolina Motors", "business_name": "North Carolina Motors", "address": "100 S Tryon St", "city": "Charlotte", "state": "NC", "zip": "28202", "lat": 35.2271, "long": -80.8431},
-        {"id": 12, "full_name": "Virginia Motors", "business_name": "Virginia Motors", "address": "101 N Columbus St", "city": "Alexandria", "state": "VA", "zip": "22314", "lat": 38.8048, "long": -77.0469},
-        {"id": 13, "full_name": "Arizona Motors", "business_name": "Arizona Motors", "address": "1 Arizona Center", "city": "Phoenix", "state": "AZ", "zip": "85004", "lat": 33.4484, "long": -112.0742},
-        {"id": 14, "full_name": "Washington Motors", "business_name": "Washington Motors", "address": "701 Pike Pl", "city": "Seattle", "state": "WA", "zip": "98101", "lat": 47.6062, "long": -122.3321},
-        {"id": 15, "full_name": "Colorado Motors", "business_name": "Colorado Motors", "address": "1600 Broadway", "city": "Denver", "state": "CO", "zip": "80202", "lat": 39.7392, "long": -104.9903},
-        {"id": 16, "full_name": "Oregon Motors", "business_name": "Oregon Motors", "address": "1001 SW Morrison St", "city": "Portland", "state": "OR", "zip": "97205", "lat": 45.5152, "long": -122.6784},
-        {"id": 17, "full_name": "Minnesota Motors", "business_name": "Minnesota Motors", "address": "55 S 5th St", "city": "Minneapolis", "state": "MN", "zip": "55402", "lat": 44.9778, "long": -93.2650},
-        {"id": 18, "full_name": "Wisconsin Motors", "business_name": "Wisconsin Motors", "address": "N17W24000 Riverwood Dr", "city": "Waukesha", "state": "WI", "zip": "53188", "lat": 43.0073, "long": -88.2290},
-        {"id": 19, "full_name": "Missouri Motors", "business_name": "Missouri Motors", "address": "One Busch Stadium Plz", "city": "Saint Louis", "state": "MO", "zip": "63102", "lat": 38.6270, "long": -90.1994},
-        {"id": 20, "full_name": "Nevada Motors", "business_name": "Nevada Motors", "address": "3600 S Las Vegas Blvd", "city": "Las Vegas", "state": "NV", "zip": "89109", "lat": 36.1699, "long": -115.1398},
-        {"id": 21, "full_name": "Tennessee Motors", "business_name": "Tennessee Motors", "address": "1 Broadway", "city": "Nashville", "state": "TN", "zip": "37203", "lat": 36.1627, "long": -86.7816},
-        {"id": 22, "full_name": "Maryland Motors", "business_name": "Maryland Motors", "address": "100 E Pratt St", "city": "Baltimore", "state": "MD", "zip": "21202", "lat": 39.2904, "long": -76.6122},
-        {"id": 23, "full_name": "Indiana Motors", "business_name": "Indiana Motors", "address": "100 S Capitol Ave", "city": "Indianapolis", "state": "IN", "zip": "46225", "lat": 39.7684, "long": -86.1581},
-        {"id": 24, "full_name": "Massachusetts Motors", "business_name": "Massachusetts Motors", "address": "100 Hanover St", "city": "Boston", "state": "MA", "zip": "02108", "lat": 42.3601, "long": -71.0589},
-        {"id": 25, "full_name": "Louisiana Motors", "business_name": "Louisiana Motors", "address": "1101 Poydras St", "city": "New Orleans", "state": "LA", "zip": "70112", "lat": 29.9511, "long": -90.2623},
-        {"id": 26, "full_name": "Alabama Motors", "business_name": "Alabama Motors", "address": "2100 1st Ave N", "city": "Birmingham", "state": "AL", "zip": "35203", "lat": 33.5186, "long": -86.8104},
-        {"id": 27, "full_name": "Kentucky Motors", "business_name": "Kentucky Motors", "address": "127 W Main St", "city": "Louisville", "state": "KY", "zip": "40202", "lat": 38.2527, "long": -85.7585},
-        {"id": 28, "full_name": "Oklahoma Motors", "business_name": "Oklahoma Motors", "address": "1 Leadership Sq", "city": "Oklahoma City", "state": "OK", "zip": "73102", "lat": 35.4676, "long": -97.5164},
-        {"id": 29, "full_name": "Connecticut Motors", "business_name": "Connecticut Motors", "address": "100 Constitution Plz", "city": "Hartford", "state": "CT", "zip": "06103", "lat": 41.7658, "long": -72.6734},
-        {"id": 30, "full_name": "Mississippi Motors", "business_name": "Mississippi Motors", "address": "301 S Congress St", "city": "Jackson", "state": "MS", "zip": "39201", "lat": 32.2988, "long": -90.1848},
-        {"id": 31, "full_name": "Arkansas Motors", "business_name": "Arkansas Motors", "address": "1 State House Plz", "city": "Little Rock", "state": "AR", "zip": "72201", "lat": 34.7465, "long": -92.2896},
-        {"id": 32, "full_name": "Utah Motors", "business_name": "Utah Motors", "address": "123 Main St", "city": "Salt Lake City", "state": "UT", "zip": "84111", "lat": 40.7608, "long": -111.8910},
-        {"id": 33, "full_name": "South Carolina Motors", "business_name": "South Carolina Motors", "address": "1500 Lady St", "city": "Columbia", "state": "SC", "zip": "29201", "lat": 34.0007, "long": -81.0348},
-        {"id": 34, "full_name": "New Mexico Motors", "business_name": "New Mexico Motors", "address": "421 Tijeras Ave NW", "city": "Albuquerque", "state": "NM", "zip": "87102", "lat": 35.0844, "long": -106.6504},
-        {"id": 35, "full_name": "Iowa Motors", "business_name": "Iowa Motors", "address": "100 Court Ave", "city": "Des Moines", "state": "IA", "zip": "50309", "lat": 41.5868, "long": -93.6250},
-        {"id": 36, "full_name": "Nevada South Motors", "business_name": "Nevada South Motors", "address": "50 S Durango Dr", "city": "Henderson", "state": "NV", "zip": "89002", "lat": 35.9757, "long": -115.0289},
-        {"id": 37, "full_name": "Hawaii Motors", "business_name": "Hawaii Motors", "address": "1111 Bishop St", "city": "Honolulu", "state": "HI", "zip": "96813", "lat": 21.3099, "long": -157.8581},
-        {"id": 38, "full_name": "Alaska Motors", "business_name": "Alaska Motors", "address": "510 L St", "city": "Anchorage", "state": "AK", "zip": "99501", "lat": 61.2181, "long": -149.9003},
-        {"id": 39, "full_name": "Idaho Motors", "business_name": "Idaho Motors", "address": "101 Main St", "city": "Boise", "state": "ID", "zip": "83702", "lat": 43.6150, "long": -116.2023},
-        {"id": 40, "full_name": "Montana Motors", "business_name": "Montana Motors", "address": "1 Last Chance Gulch", "city": "Helena", "state": "MT", "zip": "59601", "lat": 46.5891, "long": -112.0391},
-        {"id": 41, "full_name": "Wyoming Motors", "business_name": "Wyoming Motors", "address": "200 W 17th St", "city": "Cheyenne", "state": "WY", "zip": "82001", "lat": 41.1400, "long": -104.8202},
-        {"id": 42, "full_name": "Vermont Motors", "business_name": "Vermont Motors", "address": "100 State St", "city": "Montpelier", "state": "VT", "zip": "05601", "lat": 44.2632, "long": -72.5754},
-        {"id": 43, "full_name": "New Hampshire Motors", "business_name": "New Hampshire Motors", "address": "25 Capitol St", "city": "Concord", "state": "NH", "zip": "03301", "lat": 43.2081, "long": -71.5376},
-        {"id": 44, "full_name": "Rhode Island Motors", "business_name": "Rhode Island Motors", "address": "1 South Main St", "city": "Providence", "state": "RI", "zip": "02903", "lat": 41.8240, "long": -71.4128},
-        {"id": 45, "full_name": "Maine Motors", "business_name": "Maine Motors", "address": "5 State House Station", "city": "Augusta", "state": "ME", "zip": "04330", "lat": 44.3078, "long": -69.7795},
-        {"id": 46, "full_name": "South Dakota Motors", "business_name": "South Dakota Motors", "address": "500 E Capitol Ave", "city": "Pierre", "state": "SD", "zip": "57501", "lat": 44.3683, "long": -100.3364},
-        {"id": 47, "full_name": "North Dakota Motors", "business_name": "North Dakota Motors", "address": "1 Capitol Loop", "city": "Bismarck", "state": "ND", "zip": "58501", "lat": 46.8083, "long": -100.7837},
-        {"id": 48, "full_name": "Nebraska Motors", "business_name": "Nebraska Motors", "address": "1445 K St", "city": "Lincoln", "state": "NE", "zip": "68508", "lat": 40.8258, "long": -96.6852},
-        {"id": 49, "full_name": "Delaware Motors", "business_name": "Delaware Motors", "address": "820 N French St", "city": "Wilmington", "state": "DE", "zip": "19801", "lat": 39.1582, "long": -75.5244},
-        {"id": 50, "full_name": "West Virginia Motors", "business_name": "West Virginia Motors", "address": "1900 Kanawha Blvd E", "city": "Charleston", "state": "WV", "zip": "25301", "lat": 38.3498, "long": -81.6326}
+        {"id": 1, "full_name": "John Thompson", "short_name": "Downtown Toyota", "business_name": "Downtown Toyota", "address": "123 Main Street", "city": "New York", "state": "NY", "zip": "10001", "lat": 40.7128, "long": -74.006},
+        {"id": 2, "full_name": "Sarah Davis", "short_name": "Kansas City Honda", "business_name": "Kansas City Honda", "address": "456 Oak Avenue", "city": "Kansas City", "state": "KS", "zip": "66101", "lat": 39.0997, "long": -94.5786},
+        {"id": 3, "full_name": "Michael Johnson", "short_name": "Sunshine Ford", "business_name": "Sunshine Ford", "address": "789 Beach Road", "city": "Miami", "state": "FL", "zip": "33101", "lat": 25.7617, "long": -80.1918},
+        {"id": 4, "full_name": "Emily Smith", "short_name": "West Coast BMW", "business_name": "West Coast BMW", "address": "321 Pacific Highway", "city": "Los Angeles", "state": "CA", "zip": "90001", "lat": 34.0522, "long": -118.2437},
+        {"id": 5, "full_name": "Robert Wilson", "short_name": "Texas Motors", "business_name": "Texas Motors", "address": "555 Lone Star Lane", "city": "Houston", "state": "TX", "zip": "77001", "lat": 29.7604, "long": -95.3698}
     ]
 }
-
-HTTP Status: 200 OK
-Execution Time: 145ms
-
-Note: Successfully retrieved all 50 dealers with complete information including ID, full name, business name, address, city, state, zip code, and geographic coordinates (latitude and longitude).

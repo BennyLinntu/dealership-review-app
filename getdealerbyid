@@ -1,22 +1,13 @@
-================== Get Dealer by ID API Test ==================
-
-Command:
 curl -X GET http://localhost:8000/fetchDealer/2
-
-Response:
 {
     "id": 2,
-    "full_name": "Kansas City Honda",
+    "full_name": "Sarah Davis",
+    "short_name": "Kansas City Honda",
     "business_name": "Kansas City Honda",
-    "address": "4607 Main St",
+    "address": "456 Oak Avenue",
     "city": "Kansas City",
     "state": "KS",
     "zip": "66101",
     "lat": 39.0997,
     "long": -94.5786
 }
-
-HTTP Status: 200 OK
-Execution Time: 52ms
-
-Note: Successfully retrieved dealer details with all required fields including ID, full name, business name, address, city, state, zip code, and geographic coordinates.

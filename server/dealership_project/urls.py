@@ -65,6 +65,12 @@ urlpatterns = [
     path('', djangoapp_views.IndexView.as_view(), name='index'),
     path('about/', djangoapp_views.AboutView.as_view(), name='about'),
     path('contact/', djangoapp_views.ContactView.as_view(), name='contact'),
+    path('login/', djangoapp_views.LoginPageView.as_view(), name='login-page'),
+    path('logout/', djangoapp_views.LogoutPageView.as_view(), name='logout-page'),
+    path('dealer/<int:dealer_id>/',
+         djangoapp_views.DealerDetailPageView.as_view(), name='dealer-detail-page'),
+    path('dealer/<int:dealer_id>/add_review/',
+         djangoapp_views.PostReviewPageView.as_view(), name='post-review'),
 ]
 
 if settings.DEBUG:

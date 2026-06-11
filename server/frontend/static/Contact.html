@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Dealership Review</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
     <style>
         * {
@@ -286,17 +287,22 @@
                 </div>
 
                 <div style="margin-top:25px;">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400" alt="Our Office"
+                    <img src="/static/contactus.png" alt="Contact Us"
+                        onerror="this.src='https://images.unsplash.com/photo-1497366216548-37526070297c?w=400'"
                         style="width:100%;border-radius:8px;object-fit:cover;max-height:200px;">
                 </div>
             </div>
 
             <div class="contact-form">
                 <h3>Send us a Message</h3>
+                <div style="margin-bottom:20px;">
+                    <img src="/static/cars.jpeg" alt="Cars"
+                        onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400'"
+                        style="width:100%;border-radius:8px;object-fit:cover;max-height:150px;">
+                </div>
                 <form>
                     <div class="form-group">
                         <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required>
                     </div>
 
                     <div class="form-group">

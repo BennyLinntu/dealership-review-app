@@ -33,33 +33,33 @@ try:
     firefox_cmd = r"C:\Program Files\Mozilla Firefox\firefox.exe"
     if not os.path.exists(firefox_cmd):
         firefox_cmd = r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"
-    
+
     with mss.mss() as sct:
         for idx, (url, filename) in enumerate(urls_and_names, 1):
             print(f"[{idx:2d}/12] {filename:<40s}", end="", flush=True)
-            
+
             # Open URL in Firefox
             proc = subprocess.Popen([firefox_cmd, url, "-new-window"])
             time.sleep(4)  # Wait for page to load
-            
+
             # Take screenshot of primary monitor
             screenshot = sct.shot()
             screenshot_path = os.path.join(SCREENSHOT_DIR, filename)
-            
+
             # Save screenshot
             import PIL.Image
-            img = PIL.Image.frombytes('RGB', screenshot['width'], screenshot['height'], 
-                                     bytes(screenshot['rgb']))
+            img = PIL.Image.frombytes('RGB', screenshot['width'], screenshot['height'],
+                                      bytes(screenshot['rgb']))
             img.save(screenshot_path)
-            
+
             print(f" ✓")
-            
+
             # Close Firefox
             proc.terminate()
             time.sleep(1)
-    
+
     print("\n✓ All screenshots captured successfully!")
-    
+
 except Exception as e:
     print(f"\n✗ Error: {e}")
     import traceback

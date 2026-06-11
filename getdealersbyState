@@ -1,17 +1,29 @@
-================== Get Dealers by State API Test ==================
-
-Command:
 curl -X GET http://localhost:8000/fetchDealers/Kansas
-
-Response:
 {
     "dealers": [
-        {"id": 2, "full_name": "Kansas City Honda", "business_name": "Kansas City Honda", "address": "4607 Main St", "city": "Kansas City", "state": "KS", "zip": "66101", "lat": 39.0997, "long": -94.5786},
-        {"id": 20, "full_name": "Topeka Motors", "business_name": "Topeka Motors", "address": "200 W 10th Ave", "city": "Topeka", "state": "KS", "zip": "66612", "lat": 39.0473, "long": -95.6752}
+        {
+            "id": 2,
+            "full_name": "Sarah Davis",
+            "short_name": "Kansas City Honda",
+            "business_name": "Kansas City Honda",
+            "address": "456 Oak Avenue",
+            "city": "Kansas City",
+            "state": "KS",
+            "zip": "66101",
+            "lat": 39.0997,
+            "long": -94.5786
+        },
+        {
+            "id": 42,
+            "full_name": "Angela Cook",
+            "short_name": "Wichita Chevrolet",
+            "business_name": "Wichita Chevrolet",
+            "address": "3700 Douglas Avenue",
+            "city": "Wichita",
+            "state": "KS",
+            "zip": "67201",
+            "lat": 37.6872,
+            "long": -97.3301
+        }
     ]
 }
-
-HTTP Status: 200 OK
-Execution Time: 78ms
-
-Note: Successfully retrieved all dealers located in Kansas (state KS) with complete information including ID, full name, business name, address, city, state, zip code, and geographic coordinates.

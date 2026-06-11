@@ -6,10 +6,11 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
+from django.views import View
 from textblob import TextBlob
 import json
 
@@ -22,8 +23,35 @@ from djangoapp.serializers import (
 # Frontend Views
 
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
+class IndexView(View):
+    def get(self, request):
+        dealers = Dealer.objects.all().order_by('id')
+        state_filter = request.GET.get('state', '')
+        if state_filter:
+            # Map full state name to abbreviation
+            STATE_MAP = {
+                'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR',
+                'california': 'CA', 'colorado': 'CO', 'connecticut': 'CT',
+                'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA', 'hawaii': 'HI',
+                'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
+                'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME',
+                'maryland': 'MD', 'massachusetts': 'MA', 'michigan': 'MI',
+                'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
+                'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV',
+                'new hampshire': 'NH', 'new jersey': 'NJ', 'new mexico': 'NM',
+                'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND',
+                'ohio': 'OH', 'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA',
+                'rhode island': 'RI', 'south carolina': 'SC', 'south dakota': 'SD',
+                'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
+                'virginia': 'VA', 'washington': 'WA', 'west virginia': 'WV',
+                'wisconsin': 'WI', 'wyoming': 'WY',
+            }
+            abbr = STATE_MAP.get(state_filter.lower(), state_filter.upper())
+            dealers = dealers.filter(state=abbr)
+        return render(request, 'index.html', {
+            'dealers': dealers,
+            'state_filter': state_filter,
+        })
 
 
 class AboutView(TemplateView):
@@ -32,6 +60,73 @@ class AboutView(TemplateView):
 
 class ContactView(TemplateView):
     template_name = 'Contact.html'
+
+
+class LoginPageView(View):
+    def get(self, request):
+        return render(request, 'login_page.html')
+
+    def post(self, request):
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        return render(request, 'login_page.html', {'error': 'Invalid credentials'})
+
+
+class LogoutPageView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('/')
+
+
+class DealerDetailPageView(View):
+    def get(self, request, dealer_id):
+        dealer = get_object_or_404(Dealer, id=dealer_id)
+        reviews = Review.objects.filter(dealer=dealer)
+        return render(request, 'dealer_detail.html', {
+            'dealer': dealer,
+            'reviews': reviews,
+        })
+
+
+class PostReviewPageView(View):
+    def get(self, request, dealer_id):
+        dealer = get_object_or_404(Dealer, id=dealer_id)
+        from vehicles.models import CarMake, CarModel
+        car_makes = CarMake.objects.all()
+        car_models = CarModel.objects.all()
+        return render(request, 'post_review.html', {
+            'dealer': dealer,
+            'car_makes': car_makes,
+            'car_models': car_models,
+        })
+
+    def post(self, request, dealer_id):
+        dealer = get_object_or_404(Dealer, id=dealer_id)
+        review_text = request.POST.get('review', '')
+        rating = request.POST.get('rating', 3)
+        # Compute sentiment
+        analysis = TextBlob(review_text)
+        polarity = analysis.sentiment.polarity
+        if polarity > 0.1:
+            sentiment = 'positive'
+        elif polarity < -0.1:
+            sentiment = 'negative'
+        else:
+            sentiment = 'neutral'
+        user = request.user if request.user.is_authenticated else None
+        Review.objects.create(
+            dealer=dealer,
+            user=user,
+            rating=int(rating),
+            review_text=review_text,
+            sentiment=sentiment,
+            sentiment_score=polarity,
+        )
+        return redirect(f'/dealer/{dealer_id}/')
 
 # Authentication Views
 
@@ -188,11 +283,7 @@ class DjangoLoginView(views.APIView):
             token, created = Token.objects.get_or_create(user=user)
             return Response({
                 'userName': user.username,
-                'userEmail': user.email,
-                'firstName': user.first_name,
-                'lastName': user.last_name,
                 'status': 'Authenticated',
-                'token': token.key,
             }, status=status.HTTP_200_OK)
         return Response({'userName': username, 'status': 'Failed'},
                         status=status.HTTP_401_UNAUTHORIZED)
@@ -223,6 +314,7 @@ class FetchDealersView(views.APIView):
             dealers_list.append({
                 'id': d.id,
                 'full_name': d.full_name,
+                'short_name': d.business_name,
                 'business_name': d.business_name,
                 'address': d.address,
                 'city': d.city,
@@ -230,7 +322,6 @@ class FetchDealersView(views.APIView):
                 'zip': d.zip_code,
                 'lat': d.latitude,
                 'long': d.longitude,
-                'short_zip': d.zip_code,
             })
         return Response({'dealers': dealers_list}, status=status.HTTP_200_OK)
 
@@ -247,6 +338,7 @@ class FetchDealerByIDView(views.APIView):
         return Response({
             'id': d.id,
             'full_name': d.full_name,
+            'short_name': d.business_name,
             'business_name': d.business_name,
             'address': d.address,
             'city': d.city,
@@ -287,6 +379,7 @@ class FetchDealersByStateView(views.APIView):
             dealers_list.append({
                 'id': d.id,
                 'full_name': d.full_name,
+                'short_name': d.business_name,
                 'business_name': d.business_name,
                 'address': d.address,
                 'city': d.city,
@@ -333,7 +426,6 @@ class GetCarsView(views.APIView):
             car_models.append({
                 'CarMake': model.make.name,
                 'CarModel': model.name,
-                'Year': model.year,
             })
         return Response({'CarModels': car_models}, status=status.HTTP_200_OK)
 

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ dealer.business_name }} - Dealership Review</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .user-welcome {
+            color: #ffe;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .dealer-header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .dealer-header h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .dealer-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .reviews-section h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.05rem;
+        }
+
+        .sentiment-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .sentiment-positive {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .sentiment-negative {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .sentiment-neutral {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .review-text {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .review-meta {
+            font-size: 0.85rem;
+            color: #888;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 1.2rem;
+        }
+
+        .sentiment-icon {
+            font-size: 1.5rem;
+        }
+
+        .add-review-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .add-review-btn:hover {
+            opacity: 0.9;
+        }
+
+        .no-reviews {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            color: #888;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1><a href="/" style="color:white;text-decoration:none;">Dealership Review</a></h1>
+            <div>
+                <a href="/about/">About Us</a>
+                <a href="/contact/">Contact</a>
+                {% if user.is_authenticated %}
+                <span class="user-welcome">Welcome, {{ user.username }}</span>
+                <a href="/logout/">Logout</a>
+                {% else %}
+                <a href="/login/">Sign In</a>
+                <a href="/register/">Sign Up</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <a href="/" class="back-btn">← Back to All Dealers</a>
+        <div class="dealer-header">
+            <h2>{{ dealer.business_name }}</h2>
+            <p style="color:#667eea;font-size:1.1rem;">{{ dealer.full_name }}</p>
+            <div class="dealer-info">
+                <div class="info-item"><span class="info-label">Address:</span> {{ dealer.address }}</div>
+                <div class="info-item"><span class="info-label">City:</span> {{ dealer.city }}</div>
+                <div class="info-item"><span class="info-label">State:</span> {{ dealer.state }}</div>
+                <div class="info-item"><span class="info-label">ZIP:</span> {{ dealer.zip_code }}</div>
+                <div class="info-item"><span class="info-label">Phone:</span> {{ dealer.phone }}</div>
+                <div class="info-item"><span class="info-label">Email:</span> {{ dealer.email }}</div>
+            </div>
+        </div>
+
+        <div class="reviews-section">
+            <h3>Customer Reviews ({{ reviews.count }})</h3>
+            {% if user.is_authenticated %}
+            <a href="/dealer/{{ dealer.id }}/add_review/" class="add-review-btn">✍ Write a Review</a>
+            {% endif %}
+            {% if reviews %}
+            {% for review in reviews %}
+            <div class="review-card">
+                <div class="review-header">
+                    <div>
+                        <span class="reviewer-name">{{ review.user.username|default:"Anonymous" }}</span>
+                        <div class="stars">{% if review.rating >= 1 %}★{% else %}☆{% endif %}{% if review.rating >= 2 %}★{% else %}☆{% endif %}{% if review.rating >= 3 %}★{% else %}☆{% endif %}{% if review.rating >= 4 %}★{% else %}☆{% endif %}{% if review.rating >= 5 %}★{% else %}☆{% endif %}</div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        {% if review.sentiment == "positive" %}
+                        <span class="sentiment-icon">😊</span>
+                        <span class="sentiment-badge sentiment-positive">Positive</span>
+                        {% elif review.sentiment == "negative" %}
+                        <span class="sentiment-icon">😞</span>
+                        <span class="sentiment-badge sentiment-negative">Negative</span>
+                        {% else %}
+                        <span class="sentiment-icon">😐</span>
+                        <span class="sentiment-badge sentiment-neutral">Neutral</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="review-text">{{ review.review_text }}</p>
+                <div class="review-meta">
+                    <span>Date: {{ review.created_at|date:"M d, Y" }}</span>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="no-reviews">
+                <p>No reviews yet. Be the first to review this dealership!</p>
+                {% if not user.is_authenticated %}
+                <p style="margin-top:10px;"><a href="/login/" style="color:#667eea;">Sign in</a> to write a review.
+                </p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

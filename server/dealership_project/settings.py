@@ -47,7 +47,10 @@ ROOT_URLCONF = 'dealership_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend'),
+            os.path.join(BASE_DIR, 'frontend', 'static'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

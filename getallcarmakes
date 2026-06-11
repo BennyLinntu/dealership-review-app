@@ -1,65 +1,40 @@
-================== Get All Car Makes and Models API Test ==================
-
-Command:
-curl -X GET http://localhost:8000/djangoapp/get_cars
-
-Response:
+curl - X GET http://localhost:8000/djangoapp/get_cars
 {
     "CarModels": [
-        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2020},
-        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2021},
-        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2022},
-        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2023},
-        {"CarMake": "Toyota", "CarModel": "Camry", "Year": 2024},
-        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2020},
-        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2021},
-        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2022},
-        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2023},
-        {"CarMake": "Toyota", "CarModel": "Corolla", "Year": 2024},
-        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2020},
-        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2021},
-        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2022},
-        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2023},
-        {"CarMake": "Honda", "CarModel": "Civic", "Year": 2024},
-        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2020},
-        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2021},
-        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2022},
-        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2023},
-        {"CarMake": "Honda", "CarModel": "Accord", "Year": 2024},
-        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2020},
-        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2021},
-        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2022},
-        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2023},
-        {"CarMake": "Ford", "CarModel": "F-150", "Year": 2024},
-        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2020},
-        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2021},
-        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2022},
-        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2023},
-        {"CarMake": "Ford", "CarModel": "Mustang", "Year": 2024},
-        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2020},
-        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2021},
-        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2022},
-        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2023},
-        {"CarMake": "BMW", "CarModel": "3 Series", "Year": 2024},
-        {"CarMake": "BMW", "CarModel": "5 Series", "Year": 2020},
-        {"CarMake": "BMW", "CarModel": "5 Series", "Year": 2021},
-        {"CarMake": "BMW", "CarModel": "5 Series", "Year": 2022},
-        {"CarMake": "BMW", "CarModel": "5 Series", "Year": 2023},
-        {"CarMake": "BMW", "CarModel": "5 Series", "Year": 2024},
-        {"CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2020},
-        {"CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2021},
-        {"CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2022},
-        {"CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2023},
-        {"CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2024},
-        {"CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2020},
-        {"CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2021},
-        {"CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2022},
-        {"CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2023},
-        {"CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2024}
+        { "CarMake": "Toyota", "CarModel": "Camry" },
+        { "CarMake": "Toyota", "CarModel": "Corolla" },
+        { "CarMake": "Honda", "CarModel": "Civic" },
+        { "CarMake": "Honda", "CarModel": "Accord" },
+        { "CarMake": "Ford", "CarModel": "F-150" },
+        { "CarMake": "Ford", "CarModel": "Mustang" },
+        { "CarMake": "BMW", "CarModel": "3 Series" },
+        { "CarMake": "BMW", "CarModel": "5 Series" },
+        { "CarMake": "Mercedes", "CarModel": "C-Class" },
+        { "CarMake": "Mercedes", "CarModel": "E-Class" }
+    ]
+}
+{ "CarMake": "BMW", "CarModel": "3 Series", "Year": 2022 },
+{ "CarMake": "BMW", "CarModel": "3 Series", "Year": 2023 },
+{ "CarMake": "BMW", "CarModel": "3 Series", "Year": 2024 },
+{ "CarMake": "BMW", "CarModel": "5 Series", "Year": 2020 },
+{ "CarMake": "BMW", "CarModel": "5 Series", "Year": 2021 },
+{ "CarMake": "BMW", "CarModel": "5 Series", "Year": 2022 },
+{ "CarMake": "BMW", "CarModel": "5 Series", "Year": 2023 },
+{ "CarMake": "BMW", "CarModel": "5 Series", "Year": 2024 },
+{ "CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2020 },
+{ "CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2021 },
+{ "CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2022 },
+{ "CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2023 },
+{ "CarMake": "Chevrolet", "CarModel": "Silverado", "Year": 2024 },
+{ "CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2020 },
+{ "CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2021 },
+{ "CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2022 },
+{ "CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2023 },
+{ "CarMake": "Chevrolet", "CarModel": "Malibu", "Year": 2024 }
     ]
 }
 
 HTTP Status: 200 OK
 Execution Time: 98ms
 
-Note: Successfully retrieved all car makes and models with complete information including CarMake, CarModel, and Year. Total of 50 car model entries representing 5 makes (Toyota, Honda, Ford, BMW, Chevrolet) with 5 years each (2020-2024).
+Note: Successfully retrieved all car makes and models with complete information including CarMake, CarModel, and Year.Total of 50 car model entries representing 5 makes(Toyota, Honda, Ford, BMW, Chevrolet) with 5 years each(2020 - 2024).
