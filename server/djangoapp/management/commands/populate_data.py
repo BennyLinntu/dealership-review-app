@@ -2,7 +2,8 @@
 Management command to populate the database with sample data
 """
 from django.core.management.base import BaseCommand
-from djangoapp.models import Dealer
+from djangoapp.models import Dealer, Review
+from djangoapp.sentiment import analyze_sentiment
 from vehicles.models import CarMake, CarModel
 
 
@@ -125,3 +126,62 @@ class Command(BaseCommand):
                             f'Created car model: {make_name} {model_name} ({year})')
 
         self.stdout.write(self.style.SUCCESS('Database population complete!'))
+
+        # A few anonymous reviews make the UI useful straight after setup.
+        reviews_data = [
+            {
+                'dealer': 'Downtown Toyota',
+                'rating': 5,
+                'review_text': (
+                    'Fantastic experience from start to finish. The team explained '
+                    'every option and never pushed extras. I love my new Camry.'
+                ),
+                'car_make': 'Toyota',
+                'car_model': 'Camry',
+                'car_year': 2023,
+            },
+            {
+                'dealer': 'Kansas City Honda',
+                'rating': 4,
+                'review_text': (
+                    'Friendly staff and a fair price. The paperwork took a little '
+                    'longer than expected, but the car is excellent.'
+                ),
+                'car_make': 'Honda',
+                'car_model': 'Civic',
+                'car_year': 2022,
+            },
+            {
+                'dealer': 'West Coast BMW',
+                'rating': 5,
+                'review_text': (
+                    'Smooth, stress-free purchase. They arranged financing quickly '
+                    'and the car was spotless at pickup.'
+                ),
+                'car_make': 'BMW',
+                'car_model': '3 Series',
+                'car_year': 2024,
+            },
+        ]
+
+        for entry in reviews_data:
+            dealer = Dealer.objects.filter(
+                business_name=entry['dealer']).first()
+            if not dealer:
+                continue
+            analysis = analyze_sentiment(entry['review_text'])
+            Review.objects.get_or_create(
+                dealer=dealer,
+                review_text=entry['review_text'],
+                defaults={
+                    'rating': entry['rating'],
+                    'car_make': entry['car_make'],
+                    'car_model': entry['car_model'],
+                    'car_year': entry['car_year'],
+                    'purchase': True,
+                    'sentiment': analysis['sentiment'],
+                    'sentiment_score': analysis['polarity_score'],
+                },
+            )
+
+        self.stdout.write(self.style.SUCCESS('Sample reviews are ready.'))

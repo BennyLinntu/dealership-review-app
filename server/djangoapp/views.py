@@ -1,56 +1,122 @@
 """
 Views for dealership_project
 """
-from rest_framework import views, viewsets, status, generics
-from rest_framework.response import Response
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.authtoken.models import Token
+from datetime import date, datetime
+
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView
+from django.db.models import Avg, Count, Q
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
-from textblob import TextBlob
-import json
+from django.views.generic import TemplateView
+from rest_framework import generics, status, views
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 
+from djangoapp.forms import RegisterForm
 from djangoapp.models import Dealer, Review, UserProfile
+from djangoapp.sentiment import analyze_sentiment
 from djangoapp.serializers import (
-    DealerSerializer, ReviewSerializer, RegisterSerializer,
-    LoginSerializer, SentimentAnalysisSerializer, DealerDetailSerializer
+    DealerDetailSerializer,
+    DealerSerializer,
+    LoginSerializer,
+    RegisterSerializer,
+    ReviewSerializer,
+    SentimentAnalysisSerializer,
 )
+
+STATE_MAP = {
+    'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR',
+    'california': 'CA', 'colorado': 'CO', 'connecticut': 'CT',
+    'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA', 'hawaii': 'HI',
+    'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
+    'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME',
+    'maryland': 'MD', 'massachusetts': 'MA', 'michigan': 'MI',
+    'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
+    'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV',
+    'new hampshire': 'NH', 'new jersey': 'NJ', 'new mexico': 'NM',
+    'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND',
+    'ohio': 'OH', 'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA',
+    'rhode island': 'RI', 'south carolina': 'SC', 'south dakota': 'SD',
+    'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
+    'virginia': 'VA', 'washington': 'WA', 'west virginia': 'WV',
+    'wisconsin': 'WI', 'wyoming': 'WY',
+}
+STATE_NAMES = dict(Dealer.STATE_CHOICES)
+
+
+def resolve_state(value):
+    """Accept either a full state name or a two-letter abbreviation."""
+    if not value:
+        return ''
+    value = value.strip()
+    return STATE_MAP.get(value.lower(), value.upper())
+
+
+def safe_next(request, fallback='/'):
+    candidate = request.POST.get('next') or request.GET.get('next')
+    if candidate and url_has_allowed_host_and_scheme(
+        candidate,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        return candidate
+    return fallback
+
+
+def parse_date(value):
+    if not value:
+        return None
+    try:
+        return datetime.strptime(value, '%Y-%m-%d').date()
+    except ValueError:
+        return None
+
 
 # Frontend Views
 
 
 class IndexView(View):
     def get(self, request):
-        dealers = Dealer.objects.all().order_by('id')
-        state_filter = request.GET.get('state', '')
+        dealers = Dealer.objects.annotate(
+            avg_rating=Avg('reviews__rating'),
+            num_reviews=Count('reviews', distinct=True),
+        ).order_by('business_name')
+
+        state_filter = request.GET.get('state', '').strip()
+        query = request.GET.get('q', '').strip()
+
         if state_filter:
-            # Map full state name to abbreviation
-            STATE_MAP = {
-                'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR',
-                'california': 'CA', 'colorado': 'CO', 'connecticut': 'CT',
-                'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA', 'hawaii': 'HI',
-                'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
-                'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME',
-                'maryland': 'MD', 'massachusetts': 'MA', 'michigan': 'MI',
-                'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
-                'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV',
-                'new hampshire': 'NH', 'new jersey': 'NJ', 'new mexico': 'NM',
-                'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND',
-                'ohio': 'OH', 'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA',
-                'rhode island': 'RI', 'south carolina': 'SC', 'south dakota': 'SD',
-                'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
-                'virginia': 'VA', 'washington': 'WA', 'west virginia': 'WV',
-                'wisconsin': 'WI', 'wyoming': 'WY',
-            }
-            abbr = STATE_MAP.get(state_filter.lower(), state_filter.upper())
-            dealers = dealers.filter(state=abbr)
+            dealers = dealers.filter(state=resolve_state(state_filter))
+        if query:
+            dealers = dealers.filter(
+                Q(business_name__icontains=query)
+                | Q(full_name__icontains=query)
+                | Q(city__icontains=query)
+                | Q(state__icontains=query)
+            )
+
+        active_states = (
+            Dealer.objects.values_list('state', flat=True)
+            .distinct()
+            .order_by('state')
+        )
+        state_options = [
+            {'code': code, 'name': STATE_NAMES.get(code, code)}
+            for code in active_states
+        ]
+
         return render(request, 'index.html', {
             'dealers': dealers,
             'state_filter': state_filter,
+            'state_options': state_options,
+            'search_query': query,
+            'total_dealers': dealers.count(),
         })
 
 
@@ -64,16 +130,50 @@ class ContactView(TemplateView):
 
 class LoginPageView(View):
     def get(self, request):
-        return render(request, 'login_page.html')
+        if request.user.is_authenticated:
+            return redirect('/')
+        return render(request, 'login_page.html', {'next': request.GET.get('next', '')})
 
     def post(self, request):
-        username = request.POST.get('username', '')
+        username = request.POST.get('username', '').strip()
         password = request.POST.get('password', '')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            return redirect(safe_next(request))
+        return render(
+            request,
+            'login_page.html',
+            {
+                'error': 'Invalid username or password.',
+                'next': request.POST.get('next', ''),
+                'username': username,
+            },
+            status=401,
+        )
+
+
+class RegisterPageView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
             return redirect('/')
-        return render(request, 'login_page.html', {'error': 'Invalid credentials'})
+        return render(request, 'register_page.html', {'form': RegisterForm()})
+
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            UserProfile.objects.get_or_create(
+                user=user,
+                defaults={
+                    'first_name': user.first_name,
+                    'last_name': user.last_name,
+                },
+            )
+            login(request, user)
+            messages.success(request, 'Welcome! Your account is ready.')
+            return redirect(safe_next(request, '/'))
+        return render(request, 'register_page.html', {'form': form}, status=400)
 
 
 class LogoutPageView(View):
@@ -84,49 +184,95 @@ class LogoutPageView(View):
 
 class DealerDetailPageView(View):
     def get(self, request, dealer_id):
-        dealer = get_object_or_404(Dealer, id=dealer_id)
-        reviews = Review.objects.filter(dealer=dealer)
+        dealer = get_object_or_404(
+            Dealer.objects.annotate(
+                avg_rating=Avg('reviews__rating'),
+                num_reviews=Count('reviews', distinct=True),
+            ),
+            id=dealer_id,
+        )
+        reviews = Review.objects.filter(dealer=dealer).select_related('user')
         return render(request, 'dealer_detail.html', {
             'dealer': dealer,
             'reviews': reviews,
+            'average_rating': dealer.avg_rating or 0,
+            'review_count': dealer.num_reviews,
         })
 
 
 class PostReviewPageView(View):
+    def _context(self, dealer, **extra):
+        from vehicles.models import CarMake, CarModel
+        context = {
+            'dealer': dealer,
+            'car_makes': CarMake.objects.order_by('name'),
+            'car_models': CarModel.objects.order_by('make__name', 'name'),
+            'today': date.today().isoformat(),
+            'current_year': date.today().year,
+        }
+        context.update(extra)
+        return context
+
     def get(self, request, dealer_id):
         dealer = get_object_or_404(Dealer, id=dealer_id)
-        from vehicles.models import CarMake, CarModel
-        car_makes = CarMake.objects.all()
-        car_models = CarModel.objects.all()
-        return render(request, 'post_review.html', {
-            'dealer': dealer,
-            'car_makes': car_makes,
-            'car_models': car_models,
-        })
+        if not request.user.is_authenticated:
+            return redirect(f'/login/?next=/dealer/{dealer_id}/add_review/')
+        return render(request, 'post_review.html', self._context(dealer))
 
     def post(self, request, dealer_id):
         dealer = get_object_or_404(Dealer, id=dealer_id)
-        review_text = request.POST.get('review', '')
-        rating = request.POST.get('rating', 3)
-        # Compute sentiment
-        analysis = TextBlob(review_text)
-        polarity = analysis.sentiment.polarity
-        if polarity > 0.1:
-            sentiment = 'positive'
-        elif polarity < -0.1:
-            sentiment = 'negative'
-        else:
-            sentiment = 'neutral'
-        user = request.user if request.user.is_authenticated else None
+        if not request.user.is_authenticated:
+            return redirect(f'/login/?next=/dealer/{dealer_id}/add_review/')
+
+        review_text = request.POST.get('review', '').strip()
+        rating_raw = request.POST.get('rating', '')
+        car_year_raw = request.POST.get('car_year', '').strip()
+        purchase_date = parse_date(request.POST.get('purchase_date'))
+        car_year = int(car_year_raw) if car_year_raw.isdigit() else None
+        errors = []
+
+        if len(review_text) < 10:
+            errors.append('Please write at least 10 characters.')
+        if len(review_text) > 2000:
+            errors.append('Reviews cannot be longer than 2000 characters.')
+        if rating_raw not in {'1', '2', '3', '4', '5'}:
+            errors.append('Choose a rating between 1 and 5.')
+        if car_year is not None and not 1900 <= car_year <= 2100:
+            errors.append('Enter a valid car year.')
+
+        if errors:
+            return render(
+                request,
+                'post_review.html',
+                self._context(
+                    dealer,
+                    errors=errors,
+                    review_text=review_text,
+                    rating=rating_raw,
+                    car_year=car_year_raw,
+                    purchase_date=request.POST.get('purchase_date', ''),
+                    selected_make=request.POST.get('car_make', ''),
+                    selected_model=request.POST.get('car_model', ''),
+                ),
+                status=400,
+            )
+
+        analysis = analyze_sentiment(review_text)
         Review.objects.create(
             dealer=dealer,
-            user=user,
-            rating=int(rating),
+            user=request.user,
+            rating=int(rating_raw),
             review_text=review_text,
-            sentiment=sentiment,
-            sentiment_score=polarity,
+            sentiment=analysis['sentiment'],
+            sentiment_score=analysis['polarity_score'],
+            car_make=request.POST.get('car_make', '').strip()[:100],
+            car_model=request.POST.get('car_model', '').strip()[:100],
+            car_year=car_year,
+            purchase=bool(request.POST.get('purchase')),
+            purchase_date=purchase_date,
         )
-        return redirect(f'/dealer/{dealer_id}/')
+        messages.success(request, 'Your review was posted. Thanks for sharing!')
+        return redirect('dealer-detail-page', dealer_id=dealer.id)
 
 # Authentication Views
 
@@ -167,10 +313,10 @@ class LogoutView(views.APIView):
             return Response({
                 'message': 'Logout successful'
             }, status=status.HTTP_200_OK)
-        except:
+        except Token.DoesNotExist:
             return Response({
-                'error': 'Logout failed'
-            }, status=status.HTTP_400_BAD_REQUEST)
+                'message': 'Already logged out'
+            }, status=status.HTTP_200_OK)
 
 
 class RegisterView(views.APIView):
@@ -194,9 +340,18 @@ class RegisterView(views.APIView):
 
 
 class DealerListView(generics.ListAPIView):
-    queryset = Dealer.objects.all()
     serializer_class = DealerSerializer
     permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return (
+            Dealer.objects.annotate(
+                avg_rating=Avg('reviews__rating'),
+                num_reviews=Count('reviews', distinct=True),
+            )
+            .prefetch_related('reviews__user')
+            .order_by('business_name')
+        )
 
 
 class DealerDetailView(generics.RetrieveAPIView):
@@ -217,7 +372,7 @@ class DealerByStateView(generics.ListAPIView):
 
 
 class ReviewListCreateView(generics.ListCreateAPIView):
-    queryset = Review.objects.all()
+    queryset = Review.objects.select_related('user', 'dealer').all()
     serializer_class = ReviewSerializer
     permission_classes = [AllowAny]
 
@@ -234,7 +389,7 @@ class ReviewByDealerView(generics.ListAPIView):
 
     def get_queryset(self):
         dealer_id = self.kwargs['dealer_id']
-        return Review.objects.filter(dealer_id=dealer_id)
+        return Review.objects.filter(dealer_id=dealer_id).select_related('user')
 
 # Sentiment Analysis View
 
@@ -246,21 +401,12 @@ class SentimentAnalysisView(views.APIView):
         serializer = SentimentAnalysisSerializer(data=request.data)
         if serializer.is_valid():
             text = serializer.validated_data['text']
-            analysis = TextBlob(text)
-            polarity = analysis.sentiment.polarity
-
-            if polarity > 0.1:
-                sentiment = 'positive'
-            elif polarity < -0.1:
-                sentiment = 'negative'
-            else:
-                sentiment = 'neutral'
-
+            analysis = analyze_sentiment(text)
             return Response({
                 'text': text,
-                'sentiment': sentiment,
-                'polarity_score': round(polarity, 4),
-                'subjectivity_score': round(analysis.sentiment.subjectivity, 4)
+                'sentiment': analysis['sentiment'],
+                'polarity_score': analysis['polarity_score'],
+                'subjectivity_score': analysis['subjectivity_score'],
             }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -353,26 +499,8 @@ class FetchDealersByStateView(views.APIView):
     """Fetch dealers by state name or abbreviation - /fetchDealers/<state>"""
     permission_classes = [AllowAny]
 
-    STATE_MAP = {
-        'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR',
-        'california': 'CA', 'colorado': 'CO', 'connecticut': 'CT',
-        'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA', 'hawaii': 'HI',
-        'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
-        'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME',
-        'maryland': 'MD', 'massachusetts': 'MA', 'michigan': 'MI',
-        'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
-        'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV',
-        'new hampshire': 'NH', 'new jersey': 'NJ', 'new mexico': 'NM',
-        'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND',
-        'ohio': 'OH', 'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA',
-        'rhode island': 'RI', 'south carolina': 'SC', 'south dakota': 'SD',
-        'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
-        'virginia': 'VA', 'washington': 'WA', 'west virginia': 'WV',
-        'wisconsin': 'WI', 'wyoming': 'WY',
-    }
-
     def get(self, request, state):
-        state_abbr = self.STATE_MAP.get(state.lower(), state.upper())
+        state_abbr = resolve_state(state)
         dealers = Dealer.objects.filter(state=state_abbr).order_by('id')
         dealers_list = []
         for d in dealers:
@@ -396,7 +524,7 @@ class FetchReviewsByDealerView(views.APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, dealer_id):
-        reviews = Review.objects.filter(dealer_id=dealer_id)
+        reviews = Review.objects.filter(dealer_id=dealer_id).select_related('user')
         reviews_list = []
         for r in reviews:
             reviews_list.append({
@@ -404,11 +532,14 @@ class FetchReviewsByDealerView(views.APIView):
                 'name': r.user.username if r.user else 'Anonymous',
                 'dealership': dealer_id,
                 'review': r.review_text,
-                'purchase': True,
-                'purchase_date': str(r.created_at.date()),
-                'car_make': 'Toyota',
-                'car_model': 'Camry',
-                'car_year': 2021,
+                'purchase': r.purchase,
+                'purchase_date': (
+                    str(r.purchase_date) if r.purchase_date
+                    else str(r.created_at.date())
+                ),
+                'car_make': r.car_make,
+                'car_model': r.car_model,
+                'car_year': r.car_year,
                 'rating': r.rating,
                 'sentiment': r.sentiment or 'neutral',
             })
@@ -435,12 +566,8 @@ class AnalyzeSentimentView(views.APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, text):
-        analysis = TextBlob(text)
-        polarity = analysis.sentiment.polarity
-        if polarity > 0.1:
-            sentiment = 'positive'
-        elif polarity < -0.1:
-            sentiment = 'negative'
-        else:
-            sentiment = 'neutral'
-        return Response({'sentiment': sentiment}, status=status.HTTP_200_OK)
+        analysis = analyze_sentiment(text)
+        return Response({
+            'sentiment': analysis['sentiment'],
+            'polarity_score': analysis['polarity_score'],
+        }, status=status.HTTP_200_OK)

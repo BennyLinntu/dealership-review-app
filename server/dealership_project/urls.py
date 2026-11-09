@@ -11,7 +11,7 @@ from vehicles import views as vehicle_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('rest_framework.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 
     # Authentication
     path('api/login/', djangoapp_views.LoginView.as_view(), name='login'),
@@ -66,6 +66,8 @@ urlpatterns = [
     path('about/', djangoapp_views.AboutView.as_view(), name='about'),
     path('contact/', djangoapp_views.ContactView.as_view(), name='contact'),
     path('login/', djangoapp_views.LoginPageView.as_view(), name='login-page'),
+    path('register/', djangoapp_views.RegisterPageView.as_view(),
+         name='register-page'),
     path('logout/', djangoapp_views.LogoutPageView.as_view(), name='logout-page'),
     path('dealer/<int:dealer_id>/',
          djangoapp_views.DealerDetailPageView.as_view(), name='dealer-detail-page'),

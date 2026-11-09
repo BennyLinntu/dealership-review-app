@@ -3,7 +3,7 @@ Models for dealership_project
 """
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.text import slugify
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Dealer(models.Model):
@@ -78,6 +78,10 @@ class Dealer(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['state']),
+            models.Index(fields=['business_name']),
+        ]
 
     def __str__(self):
         return self.business_name
@@ -90,15 +94,26 @@ class Review(models.Model):
         Dealer, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
-    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    rating = models.IntegerField(
+        choices=[(i, str(i)) for i in range(1, 6)],
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+    )
     review_text = models.TextField()
     sentiment = models.CharField(max_length=50, null=True, blank=True)
     sentiment_score = models.FloatField(null=True, blank=True)
+    car_make = models.CharField(max_length=100, blank=True)
+    car_model = models.CharField(max_length=100, blank=True)
+    car_year = models.PositiveSmallIntegerField(null=True, blank=True)
+    purchase = models.BooleanField(default=True)
+    purchase_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['dealer', '-created_at']),
+        ]
 
     def __str__(self):
         return f"Review for {self.dealer.business_name} - Rating: {self.rating}"
